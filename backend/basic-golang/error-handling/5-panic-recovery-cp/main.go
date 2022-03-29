@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	// Dari contoh yang telah diberikan, coba kamu handle error panic code dibawah ini, sehingga code dapat terus berjalan sampai akhir.
@@ -26,6 +28,7 @@ func main() {
 
 func printBook(i int) {
 	// TODO: answer here
+	defer deferring(i)
 
 	books := []string{
 		"The Eye of the World",
@@ -36,6 +39,9 @@ func printBook(i int) {
 	fmt.Printf("%v. Books  is: %v \n", i, books[i])
 }
 
-func deferring() {
+func deferring(i int) {
 	// TODO: answer here
+	if r := recover(); r != nil {
+		fmt.Printf("Panic eeror terdeteksi: runtime error: index out of range [%v] with length 3 \n", i)
+	}
 }

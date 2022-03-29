@@ -11,8 +11,41 @@ import "fmt"
 func GetMenu() []map[string]interface{} {
 	var menu []map[string]interface{}
 
-	// TODO: answer here
+	makanan := make(map[string]interface{})
+	makanan["Nama"] = "Ayam Goreng"
+	makanan["Jenis"] = "Cepat saji"
+	makanan["Harga"] = 20_000
 
+	minuman := make(map[string]interface{})
+	minuman["Nama"] = "Cola"
+	minuman["Jenis"] = "Minuman"
+	minuman["Harga"] = 7_000
+
+	// type makanan struct {
+	// 	Nama  string
+	// 	Jenis string
+	// 	Harga string
+	// }
+
+	// type minuman struct {
+	// 	Nama  string
+	// 	Jenis string
+	// 	Harga string
+	// }
+
+	data := make(map[string]interface{})
+	for k, v := range makanan {
+		if _, ok := makanan[k]; ok {
+			data[k] = v
+		}
+	}
+	for k, v := range minuman {
+		if _, ok := minuman[k]; ok {
+			data[k] = v
+		}
+	}
+
+	menu = append(menu, makanan, minuman)
 	return menu
 }
 
