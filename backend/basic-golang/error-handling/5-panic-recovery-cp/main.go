@@ -42,6 +42,6 @@ func printBook(i int) {
 func deferring(i int) {
 	// TODO: answer here
 	if r := recover(); r != nil {
-		fmt.Printf("Panic eeror terdeteksi: runtime error: index out of range [%v] with length 3 \n", i)
+		fmt.Printf("Panic error terdeteksi: runtime error: index out of range [%v] with length 3 \n", i)
 	}
 }
