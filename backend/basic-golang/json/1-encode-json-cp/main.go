@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 )
 
 // Dari struct dan nama field yang sama dari contoh
@@ -11,12 +10,17 @@ import (
 
 type Meja struct {
 	// TODO: answer here
+	Jenis  string `json:"jenis"`
+	Warna  string `json:"color"`
+	Jumlah int    `json:"jumlah"`
 }
 
 func (m Meja) EncodeJSON() string {
 	// TODO: answer here
-}
+	mejaJSON, _ := json.Marshal(m)
+	return string(mejaJSON)
 
+}
 func NewMeja(m Meja) Meja {
 	return m
 }

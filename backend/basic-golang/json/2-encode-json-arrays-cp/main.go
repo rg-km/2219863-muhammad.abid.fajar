@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 )
 
 // Buat string JSON dengan hasil seperti berikut
@@ -10,6 +9,10 @@ import (
 
 type Meja struct {
 	// TODO: answer here
+	Jenis     string `json:"jenis"`
+	Warna     string `json:"warna"`
+	Jumlah    int    `json:"jumlah"`
+	Deskripsi string `json:"deskripsi"`
 }
 
 type Items struct {
@@ -18,6 +21,13 @@ type Items struct {
 
 func (m Items) EncodeJSON() string {
 	// TODO: answer here
+
+	a, err := json.Marshal(m.MejaMeja)
+	if err != nil {
+		return err.Error()
+	} else {
+		return string(a)
+	}
 }
 
 func NewMeja(m Items) Items {

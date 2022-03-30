@@ -1,6 +1,8 @@
 package main
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // Dari contoh yang telah diberikan, cobalah untuk melakukan encode struct menjadi json.
 // Lengkapi function EncodeToJson agar dapat mengembalikan nilai byte hasil dari encode objek Leaderboard.
@@ -14,6 +16,9 @@ import "encoding/json"
 
 type UserRank struct {
 	// TODO: answer here
+	Name  string `json:"name"`
+	Email string
+	Rank  int `json:"rank"`
 }
 
 type Leaderboard struct {
@@ -22,4 +27,12 @@ type Leaderboard struct {
 
 func EncodeToJson(leaderboard Leaderboard) ([]byte, error) {
 	// TODO: answer here
+
+	test, err := json.Marshal(leaderboard)
+
+	if err != nil {
+		return test, err
+	} else {
+		return test, nil
+	}
 }

@@ -35,10 +35,35 @@ import (
 
 // TODO: answer here
 
-func (r Ruang) EncodeJSON() string {
+type Ukuran struct {
 	// TODO: answer here
+	Panjang string `json:"panjang"`
+	Tinggi  string `json:"tinggi"`
 }
 
-func NewRuang(r Ruang) Ruang {
-	return r
+type Ruang struct {
+	// TODO: answer here
+	Nama   string `json:"nama"`
+	Jumlah int    `json:"jumlah"`
+	Warna  string `json:"warna"`
+	// assign field name `Ukuran` dengan
+	// struct `Ukuran` yang sudah dibuat sebelumnya
+	Ukuran Ukuran `json:"ukuran"`
+}
+
+type Items struct {
+	Items []Ruang
+}
+
+func (m Items) EncodeJSON() string {
+	// TODO: answer here
+	mejaJSON, err := json.Marshal(m.Items)
+	if err != nil {
+		log.Fatal("JSON Marshal error: ", err)
+	}
+	return "{\"ruangTamu\":{\"items\":" + string(mejaJSON) + "}}"
+}
+
+func NewRuang(m Items) Items {
+	return m
 }
