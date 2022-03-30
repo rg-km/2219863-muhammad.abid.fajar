@@ -15,6 +15,8 @@ var _ = Describe("Account", func() {
 			}
 			b, err := ExecuteToByteBuffer(account)
 			Expect(err).ShouldNot(HaveOccurred())
+			// fmt.Println(string(b))
+			// Expect(string(b)).To(Equal(string(b)))
 			Expect(string(b)).To(Equal("Akun Tony dengan Nomor 1002321 memiliki saldo sebesar $1000."))
 		})
 	})
