@@ -25,7 +25,30 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 
 		// TODO: answer here
-		http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
+		if r.FormValue("total") != "" {
+			total, err := strconv.Atoi(r.FormValue("total"))
+			if err != nil {
+				panic(err)
+			}
+
+			b := []Table{}
+
+			for _, c := range data {
+				if c.Total == total {
+					b = append(b, c)
+				}
+			}
+
+			if len(b) == 0 {
+				http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
+				return
+			}
+			result, err := json.Marshal(b)
+
+			w.Write(result)
+			return
+		}
+		http.Error(w, "invalid total", http.StatusNotFound)
 		return
 	}
 

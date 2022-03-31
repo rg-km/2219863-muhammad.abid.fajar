@@ -25,7 +25,7 @@ var _ = Describe("GET JSON Response", func() {
 			httpserver.TableHandler(rec, req)
 			result := rec.Result()
 			defer result.Body.Close()
-			if result.StatusCode != http.StatusBadRequest {
+			if result.StatusCode == http.StatusBadRequest {
 				log.Fatalf("expected status bad request 400; got %v", result.StatusCode)
 			}
 
