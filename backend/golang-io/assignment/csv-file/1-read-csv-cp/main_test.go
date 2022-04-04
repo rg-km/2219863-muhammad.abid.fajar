@@ -11,7 +11,8 @@ var _ = Describe("Main", func() {
 			data := make(map[string]string)
 			data, err := CSVToMap(data, "questions.csv")
 			Expect(err).To(BeNil())
-
+			// data["Nama ibukota indonesia?"] = "Jakarta"
+			// fmt.Printf(data["Nama ibukota indonesia?"])
 			Expect(data["Nama ibukota indonesia?"]).To(Equal("Jakarta"))
 			Expect(data["Siapakah presiden pertama Indonesia?"]).To(Equal("Soekarno"))
 		})
