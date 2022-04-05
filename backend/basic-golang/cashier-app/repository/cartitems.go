@@ -78,6 +78,8 @@ func (u *CartItemRepository) Add(product Product) error {
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
+	var zeroA = &CartItemRepository{}
+	*u = *zeroA
 	return nil // TODO: replace this
 }
 
