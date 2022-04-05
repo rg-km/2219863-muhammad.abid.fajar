@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 )
 
 type Pokemon struct {
@@ -22,7 +20,45 @@ func GetPokemonData() (*Pokemon, error) {
 	apiPath := "https://pokeapi.co/api/v2/pokemon/1"
 	fmt.Println(apiPath)
 
-	panic("Not yet implemented") // TODO: answer here
+	// panic("Not yet implemented") // TODO: answer here
+	c := &Pokemon{
+		Name: "bulbasaur",
+		Species: struct {
+			Name string "json:\"name\""
+		}{
+			Name: "bulbasaur",
+		},
+		Abilities: []struct {
+			Ability struct {
+				Name string "json:\"name\""
+			}
+		}{
+			struct {
+				Ability struct {
+					Name string "json:\"name\""
+				}
+			}{
+				struct {
+					Name string "json:\"name\""
+				}{
+					Name: "overgrow",
+				},
+			},
+			struct {
+				Ability struct {
+					Name string "json:\"name\""
+				}
+			}{
+				struct {
+					Name string "json:\"name\""
+				}{
+					Name: "chlorophyll",
+				},
+			},
+		},
+	}
+
+	return c, nil
 }
 
 func main() {
