@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 )
 
 type Pokemon struct {
@@ -21,44 +23,57 @@ func GetPokemonData() (*Pokemon, error) {
 	fmt.Println(apiPath)
 
 	// panic("Not yet implemented") // TODO: answer here
-	c := &Pokemon{
-		Name: "bulbasaur",
-		Species: struct {
-			Name string "json:\"name\""
-		}{
-			Name: "bulbasaur",
-		},
-		Abilities: []struct {
-			Ability struct {
-				Name string "json:\"name\""
-			}
-		}{
-			struct {
-				Ability struct {
-					Name string "json:\"name\""
-				}
-			}{
-				struct {
-					Name string "json:\"name\""
-				}{
-					Name: "overgrow",
-				},
-			},
-			struct {
-				Ability struct {
-					Name string "json:\"name\""
-				}
-			}{
-				struct {
-					Name string "json:\"name\""
-				}{
-					Name: "chlorophyll",
-				},
-			},
-		},
+	// c := &Pokemon{
+	// 	Name: "bulbasaur",
+	// 	Species: struct {
+	// 		Name string "json:\"name\""
+	// 	}{
+	// 		Name: "bulbasaur",
+	// 	},
+	// 	Abilities: []struct {
+	// 		Ability struct {
+	// 			Name string "json:\"name\""
+	// 		}
+	// 	}{
+	// 		struct {
+	// 			Ability struct {
+	// 				Name string "json:\"name\""
+	// 			}
+	// 		}{
+	// 			struct {
+	// 				Name string "json:\"name\""
+	// 			}{
+	// 				Name: "overgrow",
+	// 			},
+	// 		},
+	// 		struct {
+	// 			Ability struct {
+	// 				Name string "json:\"name\""
+	// 			}
+	// 		}{
+	// 			struct {
+	// 				Name string "json:\"name\""
+	// 			}{
+	// 				Name: "chlorophyll",
+	// 			},
+	// 		},
+	// 	},
+	// }
+
+	// return c, nil
+	client := &http.Client{}
+	res, err := client.Get(apiPath)
+	if err != nil {
+		return nil, err
 	}
 
-	return c, nil
+	defer res.Body.Close()
+
+	pokemon := Pokemon{}
+
+	json.NewDecoder(res.Body).Decode(&pokemon)
+
+	return &pokemon, nil
 }
 
 func main() {
