@@ -51,10 +51,46 @@ func (api *API) addToCart(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 }
 
+// todo 2 buah
 func (api *API) clearCart(w http.ResponseWriter, req *http.Request) {
-	// TODO: answer here
+	err := api.cartItemRepo.ResetCartItems()
+	encoder := json.NewEncoder(w)
+
+	defer func() {
+		if err != nil {
+			// TODO: answer here
+			encoder.Encode(CartErrorResponse{Error: err.Error()})
+		}
+	}()
+	r := CartListSuccessResponse{}
+	r.CartItems = nil
+
+	encoder.Encode(r)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (api *API) cartList(w http.ResponseWriter, req *http.Request) {
-	encoder.Encode(CartListSuccessResponse{CartItems: []repository.CartItem{}}) // TODO: replace this
+	cartItems, err := api.cartItemRepo.SelectAll()
+	encoder := json.NewEncoder(w)
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(CartErrorResponse{Error: err.Error()})
+			return
+		}
+	}()
+	//
+	r := CartListSuccessResponse{}
+	r.CartItems = make([]repository.CartItem, 0)
+	//
+	for _, cartItem := range cartItems {
+		r.CartItems = append(r.CartItems, repository.CartItem{
+			Category:    cartItem.Category,
+			ProductName: cartItem.ProductName,
+			Price:       cartItem.Price,
+			Quantity:    cartItem.Quantity,
+		})
+	}
+	encoder.Encode(r)
+	w.WriteHeader(http.StatusOK)
 }

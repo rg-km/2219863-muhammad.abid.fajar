@@ -19,6 +19,25 @@ type ProductListSuccessResponse struct {
 	Products []Product `json:"products"`
 }
 
+// todo 1 buah kelar
 func (api *API) productList(w http.ResponseWriter, req *http.Request) {
-	encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
+	products, err := api.productsRepo.SelectAll()
+	encoder := json.NewEncoder(w)
+	response := ProductListSuccessResponse{}
+	response.Products = make([]Product, 0)
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+			return
+		}
+	}()
+	for _, product := range products {
+		response.Products = append(response.Products, Product{
+			Name:     product.ProductName,
+			Price:    product.Price,
+			Category: product.Category,
+		})
+	}
+	encoder.Encode(response)
 }
