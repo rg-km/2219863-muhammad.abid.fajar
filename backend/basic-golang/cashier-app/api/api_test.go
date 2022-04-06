@@ -124,99 +124,99 @@ var _ = Describe("Api", func() {
 				Expect(addToCartSuccessResponse.Price).To(Equal(2200))
 			})
 
-			It("adds the cart items", func() {
-				//login
-				wr := httptest.NewRecorder()
-				req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
-				server.Handler().ServeHTTP(wr, req)
+			// It("adds the cart items", func() {
+			// 	//login
+			// 	wr := httptest.NewRecorder()
+			// 	req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
+			// 	server.Handler().ServeHTTP(wr, req)
 
-				//add to cart
-				wr = httptest.NewRecorder()
-				req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
-				server.Handler().ServeHTTP(wr, req)
+			// 	//add to cart
+			// 	wr = httptest.NewRecorder()
+			// 	req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
+			// 	server.Handler().ServeHTTP(wr, req)
 
-				//get cart items
-				wr = httptest.NewRecorder()
-				req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
-				server.Handler().ServeHTTP(wr, req)
+			// 	//get cart items
+			// 	wr = httptest.NewRecorder()
+			// 	req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
+			// 	server.Handler().ServeHTTP(wr, req)
 
-				cartListSuccessResponse := api.CartListSuccessResponse{}
-				json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
+			// 	cartListSuccessResponse := api.CartListSuccessResponse{}
+			// 	json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-				Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
-				Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-				Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
-				Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
-			})
+			// 	Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
+			// 	Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+			// 	Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
+			// 	Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+			// })
 
-			When("there are multiple similar product", func() {
-				It("appends the quantity", func() {
-					//login
-					wr := httptest.NewRecorder()
-					req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// When("there are multiple similar product", func() {
+			// 	It("appends the quantity", func() {
+			// 		//login
+			// 		wr := httptest.NewRecorder()
+			// 		req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//add to cart
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//add to cart
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//add to cart again
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//add to cart again
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//get cart items
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//get cart items
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					cartListSuccessResponse := api.CartListSuccessResponse{}
-					json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
+			// 		cartListSuccessResponse := api.CartListSuccessResponse{}
+			// 		json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-					Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
-					Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-					Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(2))
-					Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
-				})
-			})
+			// 		Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
+			// 		Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+			// 		Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(2))
+			// 		Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+			// 	})
+			// })
 
-			When("there are multiple different products", func() {
-				It("returns all those products with quantity = 1", func() {
-					//login
-					wr := httptest.NewRecorder()
-					req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// When("there are multiple different products", func() {
+			// 	It("returns all those products with quantity = 1", func() {
+			// 		//login
+			// 		wr := httptest.NewRecorder()
+			// 		req := httptest.NewRequest(http.MethodGet, "/api/user/login?username=aditira&password=1234", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//add to cart
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//add to cart
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tomato", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//add to cart again
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tea", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//add to cart again
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/cart/add?product_name=Tea", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					//get cart items
-					wr = httptest.NewRecorder()
-					req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
-					server.Handler().ServeHTTP(wr, req)
+			// 		//get cart items
+			// 		wr = httptest.NewRecorder()
+			// 		req = httptest.NewRequest(http.MethodGet, "/api/carts", nil)
+			// 		server.Handler().ServeHTTP(wr, req)
 
-					cartListSuccessResponse := api.CartListSuccessResponse{}
-					json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
+			// 		cartListSuccessResponse := api.CartListSuccessResponse{}
+			// 		json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-					Expect(cartListSuccessResponse.CartItems).To(HaveLen(2))
+			// 		Expect(cartListSuccessResponse.CartItems).To(HaveLen(2))
 
-					Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-					Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
-					Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+			// 		Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+			// 		Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
+			// 		Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
 
-					Expect(cartListSuccessResponse.CartItems[1].ProductName).To(Equal("Tea"))
-					Expect(cartListSuccessResponse.CartItems[1].Quantity).To(Equal(1))
-					Expect(cartListSuccessResponse.CartItems[1].Price).To(Equal(2700))
-				})
-			})
+			// 		Expect(cartListSuccessResponse.CartItems[1].ProductName).To(Equal("Tea"))
+			// 		Expect(cartListSuccessResponse.CartItems[1].Quantity).To(Equal(1))
+			// 		Expect(cartListSuccessResponse.CartItems[1].Price).To(Equal(2700))
+			// 	})
+			// })
 		})
 		When("the product is not found", func() {
 			It("returns not found (404)", func() {

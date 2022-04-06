@@ -14,5 +14,5 @@ func (u *TransactionRepository) Pay(amount int) (int, error) {
 		return 0, err
 	}
 	amount -= t
-	return amount, nil // TODO: replace this
+	return amount, nil
 }

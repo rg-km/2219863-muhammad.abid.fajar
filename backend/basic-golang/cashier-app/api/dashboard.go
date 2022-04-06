@@ -42,37 +42,28 @@ func (api *API) dashboard(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 	}()
-
 	if err != nil {
 		return
 	}
-
 	if err != nil {
 		return
 	}
-
 	sumPrice, err := api.cartItemRepo.TotalPrice()
-
 	if err != nil {
 		return
 	}
-
 	cashParam := req.URL.Query().Get("cash")
-
 	if cashParam == "" {
 		cashParam = "0"
 	}
 	cash, err := strconv.Atoi(cashParam)
-
 	if err != nil {
 		return
 	}
-
 	moneyChanges, err := api.transactionRepo.Pay(cash)
 	if err != nil {
 		return
 	}
-
 	response := DashboardSuccessResponse{
 		Username:     *username,
 		TotalPrice:   sumPrice,

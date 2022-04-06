@@ -7,6 +7,7 @@ import (
 	"github.com/ruang-guru/playground/backend/basic-golang/cashier-app/repository"
 )
 
+// todo 1 buah
 type API struct {
 	usersRepo       repository.UserRepository
 	productsRepo    repository.ProductRepository
@@ -20,13 +21,14 @@ func NewAPI(usersRepo repository.UserRepository, productsRepo repository.Product
 	api := API{
 		usersRepo, productsRepo, cartItemRepo, transactionRepo, mux,
 	}
-	mux.HandleFunc("/api/user/login", api.login)
-	mux.HandleFunc("/api/user/logout", api.logout)
-	mux.HandleFunc("/api/dashboard", api.dashboard)
-	mux.HandleFunc("/api/products", api.productList)
-	mux.HandleFunc("/api/cart/add", api.addToCart)
-	mux.HandleFunc("/api/cart/clear", api.clearCart)
-	mux.HandleFunc("/api/carts", api.cartList)
+	mux.HandleFunc("/api/user/login", api.login) // 
+	mux.HandleFunc("/api/user/logout", api.logout) // 
+	mux.HandleFunc("/api/dashboard", api.dashboard) //
+	mux.HandleFunc("/api/products", api.productList) //
+	mux.HandleFunc("/api/cart/add", api.addToCart) //
+	// TODO: answer here
+	mux.HandleFunc("/api/cart", api.cartList) //
+	mux.HandleFunc("/api/cart/clear", api.clearCart) //
 
 	return api
 }

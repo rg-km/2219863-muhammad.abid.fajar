@@ -93,7 +93,7 @@ func (u *CartItemRepository) Add(product Product) error {
 			Quantity:    1,
 		})
 	}
-	return u.Save(cartItems) // TODO: replace this
+	return u.Save(cartItems)
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
@@ -103,7 +103,7 @@ func (u *CartItemRepository) ResetCartItems() error {
 	}
 	cartItems = nil
 
-	return u.Save(cartItems) // TODO: replace this
+	return u.Save(cartItems)
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
@@ -111,17 +111,10 @@ func (u *CartItemRepository) TotalPrice() (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	var dummy []int
 	var total int
+
 	for i := 0; i < len(cartItems); i++ {
-		price := cartItems[i].Price
-		dummy = append(dummy, int(price))
+		total += cartItems[i].Price * cartItems[i].Quantity
 	}
-
-	for _, v := range dummy {
-		total += v
-	}
-	total += 2000
-
 	return total, nil
 }

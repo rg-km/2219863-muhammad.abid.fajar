@@ -16,25 +16,26 @@ func NewUserRepository(db db.DB) UserRepository {
 }
 
 func (u *UserRepository) LoadOrCreate() ([]User, error) {
-	records, err := u.db.Load("users")
+	record, err := u.db.Load("users")
 	if err != nil {
-		records = [][]string{
+		record = [][]string{
 			{"username", "password", "loggedin"},
 		}
-		if err := u.db.Save("users", records); err != nil {
+		if err := u.db.Save("users", record); err != nil {
 			return nil, err
 		}
 	}
+
 	result := make([]User, 0)
-	for i := 1; i < len(records); i++ {
-		loggedIn, err := strconv.ParseBool(records[i][2])
+	for i := 1; i < len(record); i++ {
+		loggedin, err := strconv.ParseBool(record[i][2])
 		if err != nil {
 			return nil, err
 		}
 		user := User{
-			Username: records[i][0],
-			Password: records[i][i],
-			Loggedin: loggedIn,
+			Username: record[i][0],
+			Password: record[i][1],
+			Loggedin: loggedin,
 		}
 		result = append(result, user)
 	}
@@ -50,6 +51,7 @@ func (u *UserRepository) SelectAll() ([]User, error) {
 }
 
 func (u UserRepository) Login(username string, password string) (*string, error) {
+
 	if err := u.LogoutAll(); err != nil {
 		return nil, err
 	}
@@ -61,10 +63,10 @@ func (u UserRepository) Login(username string, password string) (*string, error)
 	for _, user := range users {
 		if user.Username == username && user.Password == password {
 			u.changeStatus(username, true)
-			return &username, nil
+			return &user.Username, nil
 		}
 	}
-	return nil, fmt.Errorf("Login Failed") // TODO: replace this
+	return nil, fmt.Errorf("Login Failed")
 }
 
 func (u *UserRepository) FindLoggedinUser() (*string, error) {
@@ -77,7 +79,7 @@ func (u *UserRepository) FindLoggedinUser() (*string, error) {
 			return &user.Username, nil
 		}
 	}
-	return nil, fmt.Errorf("no user is logged in") // TODO: replace this
+	return nil, fmt.Errorf("no user is logged in")
 }
 
 func (u *UserRepository) Logout(username string) error {
@@ -85,7 +87,10 @@ func (u *UserRepository) Logout(username string) error {
 	if err != nil {
 		return err
 	}
-	return u.changeStatus(*userLogin, false) // TODO: replace this
+	if userLogin == nil {
+		return fmt.Errorf("no user is logged in")
+	}
+	return u.changeStatus(*userLogin, false)
 }
 
 func (u *UserRepository) Save(users []User) error {
@@ -113,7 +118,7 @@ func (u *UserRepository) changeStatus(username string, status bool) error {
 			return u.Save(users)
 		}
 	}
-	return fmt.Errorf("user not found")
+	return fmt.Errorf("User not found")
 }
 
 func (u *UserRepository) LogoutAll() error {
