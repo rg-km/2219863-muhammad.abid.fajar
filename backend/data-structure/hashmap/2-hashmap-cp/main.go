@@ -27,5 +27,21 @@ func main() {
 }
 
 func AnagramsChecker(str1 string, str2 string) string {
-	return "" // TODO: replace this
+	stoneMap := map[rune]bool{}
+	count := 0
+
+	for _, val := range str1 {
+		stoneMap[val] = true
+	}
+
+	for _, stone := range str2 {
+		if _, exists := stoneMap[stone]; exists {
+			count++
+		}
+	}
+	if count != len(str2) {
+		return "Bukan Anagram"
+	} else {
+		return "Anagram"
+	}
 }
