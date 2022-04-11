@@ -5,8 +5,16 @@ package main
 // Lengkapi function NewStack sehingga function tersebut dapat mengembalikan objek Stack dengan memiliki ukuran dari parameter.
 type Stack struct {
 	// TODO: answer here
+	Top  int
+	Size int
+	Data []int
 }
 
 func NewStack(size int) Stack {
 	// TODO: answer here
+	var d Stack
+	d.Size = size
+	d.Top = -1
+
+	return d
 }
