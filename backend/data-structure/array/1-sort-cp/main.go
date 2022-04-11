@@ -25,9 +25,27 @@ func main() {
 }
 
 func Sort(arr []int) []int {
-	return []int{} // TODO: replace this
+	swapped := false //Untuk memeriksa apakah array sudah diurutkan; kemudian return;
+	for i := 0; i < len(arr)-1; i++ {
+		for j := 0; j < len(arr)-1; j++ {
+			if arr[j] > arr[j+1] {
+				//elemen bertukar
+				arr[j], arr[j+1] = arr[j+1], arr[j]
+				swapped = true
+			}
+		}
+		if !swapped {
+			return arr
+		}
+	}
+	return arr
 }
 
 func RotateLeft(d int, arr []int) []int {
-	return []int{} // TODO: replace this
+	for ; d > 0; d-- {
+		left := arr[0]
+		arr = arr[1:]
+		arr = append(arr, left)
+	}
+	return arr // TODO: replace this
 }
