@@ -67,11 +67,16 @@ func (l *LinkedList) DeleteVal(val int) (LinkedList, error) {
 	for i := 0; i < l.len; i++ {
 		if ptr.value == val {
 			// TODO: answer here
+			l.head = l.head.next
+			l.len--
+			l.head.value--
+			l.head.next.value--
+			
 			return *l, nil
 		}
 		ptr = ptr.next
 	}
-	return LinkedList{}, fmt.Errorf("node not found")
+	return *l, fmt.Errorf("node not found")
 }
 
 // GetAt mengembalikan node pada posisi yang diberikan dari linked list
