@@ -24,6 +24,7 @@ func (s *Set) Add(elem string) {
 func (s *Set) Delete(elem string) (bool, error) {
 	for k := range s.Elements {
 		if k == elem {
+			delete(s.Elements, elem)
 			return true, nil
 		}
 	}
