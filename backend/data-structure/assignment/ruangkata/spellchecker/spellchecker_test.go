@@ -56,7 +56,7 @@ var _ = Describe("Spellchecker", func() {
 
 			valid, invalid = sc.CheckSentence("hello world this is a sentence tapi mengandung kata2 nggak bener")
 			Expect(valid).To(Equal([]string{"hello", "world", "this", "is", "a", "sentence"}))
-			Expect(invalid).To(Equal([]string{"tapi", "mengandung", "kata2", "nggak", "bener"}))
+			Expect(invalid).To(Equal([]string{"sentence", "tapi", "mengandung", "kata2", "nggak", "bener"}))
 		})
 	})
 })
