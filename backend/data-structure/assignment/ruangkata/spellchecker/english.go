@@ -2,6 +2,7 @@ package spellchecker
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 
@@ -49,9 +50,48 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 }
 
 func (s *spellchecker) CheckWord(word string) bool {
+	var d []string
+	c, _ := parseFile()
+	for v, _ := range c {
+		d = append(d, v)
+	}
+	for _, v := range d {
+		if v == strings.ToLower(word) {
+			return true
+		}
+	}
 	return false // TODO: replace this
 }
 
-func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
-	return nil, nil // TODO: replace this
+func (s *spellchecker) CheckSentence(sentence string) ([]string, []string) {
+
+	dummy := strings.Split(sentence, " ")
+	fmt.Println(dummy)
+	var d []string
+	validWords := make([]string, 0, 20)
+	invalidWords := make([]string, 0, 20)
+	c, _ := parseFile()
+	for v, _ := range c {
+		d = append(d, v)
+	}
+	for _, v := range dummy {
+		for _, j := range d {
+			if v == j {
+				validWords = append(validWords, v)
+			}
+		}
+	}
+
+	for i, v := range dummy {
+		for o, j := range validWords {
+			if v != j && dummy[i] == dummy[o+(len(dummy)-len(validWords))] {
+				invalidWords = append(invalidWords, v)
+			}
+		}
+	}
+
+	return validWords, invalidWords // TODO: replace this
+}
+func remove(slice []string, s int) []string {
+	return append(slice[:s], slice[s+1:]...)
 }
