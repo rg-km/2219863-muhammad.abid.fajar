@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 // Implementasikan MusicPlayer yang merupakan representasi dari pemutar musik.
 // MusicPlayer memiliki atribut Playlist. Playlist merupakan daftar lagu yang tersimpan.
 // Sebagai gambaran, seperti pada Spotify, playlist merepresentasikan lagu-lagu yang disimpan dalam satu playlist yang sama.
@@ -46,11 +44,14 @@ func NewMusicPlayer() MusicPlayer {
 }
 
 func (mp *MusicPlayer) AddSong(song Song) {
+
 	// TODO: answer here
+
 }
 
 func (mp *MusicPlayer) Play() string {
 	// TODO: answer here
+	return ""
 }
 
 func (p *Playlist) Repeat() {
