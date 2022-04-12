@@ -82,16 +82,13 @@ func (s *spellchecker) CheckSentence(sentence string) ([]string, []string) {
 		}
 	}
 
-	for i, v := range dummy {
-		for o, j := range validWords {
-			if v != j && dummy[i] == dummy[o+(len(dummy)-len(validWords))] {
-				invalidWords = append(invalidWords, v)
+	for i := 0; i < len(dummy); i++ {
+		for k := 1; k < len(validWords); k++ {
+			if dummy[i] != validWords[k] && dummy[i] == dummy[k+(len(dummy)-len(validWords))] {
+				invalidWords = append(invalidWords, dummy[i])
 			}
 		}
 	}
 
 	return validWords, invalidWords // TODO: replace this
-}
-func remove(slice []string, s int) []string {
-	return append(slice[:s], slice[s+1:]...)
 }
