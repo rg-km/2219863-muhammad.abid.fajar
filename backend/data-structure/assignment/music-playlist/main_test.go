@@ -61,7 +61,7 @@ var _ = Describe("Music Player", func() {
 						Title:  "Hati-Hati di Jalan",
 					})
 					output := player.Play()
-					Expect(player.Playlist.Songs).To(HaveLen(0))
+					Expect(player.Playlist.Songs).To(HaveLen(0))//
 					Expect(output).To(Equal("Now playing Tulus - Hati-Hati di Jalan"))
 				})
 			})
@@ -99,7 +99,7 @@ var _ = Describe("Music Player", func() {
 							Title:  "To The Bone",
 						})
 						output := player.Play()
-						Expect(player.Playlist.Songs).To(HaveLen(3))
+						Expect(player.Playlist.Songs).To(HaveLen(3)) //
 						Expect(output).To(Equal("Now playing Tulus - Hati-Hati di Jalan"))
 					})
 				})
@@ -123,7 +123,7 @@ var _ = Describe("Music Player", func() {
 						})
 						player.Play()
 						output := player.Play()
-						Expect(player.Playlist.Songs).To(HaveLen(2))
+						Expect(player.Playlist.Songs).To(HaveLen(2)) //
 						Expect(output).To(Equal("Now playing TREASURE - DARARI"))
 					})
 				})
@@ -152,7 +152,7 @@ var _ = Describe("Music Player", func() {
 						output := player.Play()
 						Expect(player.Playlist.Songs).To(HaveLen(4))
 						Expect(output).To(Equal("Now playing Tulus - Hati-Hati di Jalan"))
-						Expect(player.Playlist.Songs[3].Singer).To(Equal("Tulus"))
+						Expect(player.Playlist.Songs[3].Singer).To(Equal("Tulus")) //
 						Expect(player.Playlist.Songs[3].Title).To(Equal("Hati-Hati di Jalan"))
 					})
 				})
@@ -178,7 +178,7 @@ var _ = Describe("Music Player", func() {
 						player.Play()
 						output := player.Play()
 						Expect(player.Playlist.Songs).To(HaveLen(4))
-						Expect(output).To(Equal("Now playing TREASURE - DARARI"))
+						Expect(output).To(Equal("Now playing TREASURE - DARARI")) //
 						Expect(player.Playlist.Songs[3].Singer).To(Equal("TREASURE"))
 						Expect(player.Playlist.Songs[3].Title).To(Equal("DARARI"))
 					})
