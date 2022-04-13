@@ -12,9 +12,9 @@ type Stack struct {
 
 func NewStack(size int) Stack {
 	// TODO: answer here
-	var d Stack
-	d.Size = size
-	d.Top = -1
-
-	return d
+	return Stack{
+		Top:  -1,
+		Size: size,
+		Data: []int{},
+	}
 }
