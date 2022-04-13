@@ -25,7 +25,8 @@ func NewTextEditor() *TextEditor {
 
 func (te *TextEditor) Write(ch rune) {
 	// TODO: answer here
-	te.UndoStack.Data = append(te.UndoStack.Data, ch)
+	te.UndoStack.Push(ch)
+
 }
 
 func (te *TextEditor) Read() []rune {
@@ -37,17 +38,20 @@ func (te *TextEditor) Read() []rune {
 
 func (te *TextEditor) Undo() {
 	// TODO: answer here
-	// _, e := te.UndoStack.Pop()
-	// if e == nil {
-	// 	return
-	// }
-	// te.RedoStack.Pop()
-	// te.UndoStack.Data = append(te.UndoStack.Data, f)
-
-
+	checkundo, err := te.UndoStack.Peek()
+	if err != nil {
+		return
+	}
+	te.UndoStack.Pop()
+	te.RedoStack.Push(checkundo)
 }
 
 func (te *TextEditor) Redo() {
 	// TODO: answer here
-	
+	checkredo, err := te.RedoStack.Peek()
+	if err != nil {
+		return
+	}
+	te.UndoStack.Push(checkredo)
+	te.RedoStack.Pop()
 }
