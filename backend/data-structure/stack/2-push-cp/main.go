@@ -25,7 +25,7 @@ func NewStack(size int) Stack {
 func (s *Stack) Push(Elemen int) error {
 	// TODO: answer here
 	if s.Top == len(s.Data) {
-		return errors.New("stack overflow")
+		return ErrStackOverflow
 	} else {
 		s.Top += 1
 		s.Data[s.Top] = Elemen
