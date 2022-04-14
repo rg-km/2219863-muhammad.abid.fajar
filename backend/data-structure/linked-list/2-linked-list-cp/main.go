@@ -67,11 +67,13 @@ func (l *LinkedList) DeleteVal(val int) (LinkedList, error) {
 	for i := 0; i < l.len; i++ {
 		if ptr.value == val {
 			// TODO: answer here
-			l.head = l.head.next
+			if i > 0 {
+				prevNode := l.GetAt(i - 1)
+				prevNode.next = l.GetAt(i).next
+			} else {
+				l.head = ptr.next
+			}
 			l.len--
-			l.head.value--
-			l.head.next.value--
-			
 			return *l, nil
 		}
 		ptr = ptr.next
