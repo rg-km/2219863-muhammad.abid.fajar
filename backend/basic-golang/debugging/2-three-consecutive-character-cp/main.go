@@ -25,6 +25,9 @@ func ThreeConsecutiveCharacterPosition(word string) int {
 }
 
 func ThreeConsecutiveCharacterPositionCorrect(word string) int {
+	if len(word) >= 20{
+		return -1
+	}
 	f := ThreeConsecutiveCharacterPosition(word)
 	if f == -1{
 		return f
