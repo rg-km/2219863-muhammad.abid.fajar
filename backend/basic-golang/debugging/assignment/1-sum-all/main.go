@@ -22,5 +22,9 @@ func SumAll(arr []int) int {
 }
 
 func SumAllCorrect(arr []int) int {
-	return 0 // TODO: replace this
+	var f int
+	for _, k := range arr {
+		f += k
+	}
+	return f
 }

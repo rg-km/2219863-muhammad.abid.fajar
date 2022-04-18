@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	/*
@@ -39,5 +42,5 @@ func IsExistInSource(source, search string) bool {
 }
 
 func IsExistInSourceCorrect(source, search string) bool {
-	return false // TODO: replace this
+	return strings.Contains(source, search) // TODO: replace this
 }
