@@ -30,5 +30,9 @@ func ReverseWord(word string) string {
 }
 
 func ReverseWordCorrect(word string) string {
-	return 0 // TODO: replace this
+	runes := []rune(word)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
 }
