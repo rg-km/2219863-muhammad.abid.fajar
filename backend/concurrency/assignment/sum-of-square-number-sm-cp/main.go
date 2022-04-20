@@ -25,8 +25,10 @@ func createRequest(workerInput chan<- int, workerOutput <-chan int, wg *sync.Wai
 			var res int
 
 			// TODO: answer here
-
+			res = i * i
 			//tambahkan res ke result. Selain itu gunakan juga sesuatu yang menghindari data race
+			result += res
+			wg.Wait()
 			// TODO: answer here
 			fmt.Println(res)
 		}(i)

@@ -2,6 +2,7 @@ package main
 
 import (
 	// TODO: answer here
+	"fmt"
 	"time"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -14,6 +15,10 @@ var _ = Describe("Goroutine", func() {
 	It("can be used with anonymous function", func() {
 		called := false
 		// TODO: answer here
+		go func() {
+			called = true
+			fmt.Println("selamat sore")
+		}()
 		time.Sleep(10 * time.Millisecond)
 		Expect(called).To(Equal(true))
 	})

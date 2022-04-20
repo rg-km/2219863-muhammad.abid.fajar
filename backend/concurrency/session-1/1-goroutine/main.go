@@ -18,7 +18,7 @@ func main() {
 	fmt.Println("Main started", time.Since(start))
 
 	go func() {
-		// time.Sleep(11 * time.Millisecond)
+		time.Sleep(11 * time.Millisecond)
 		fmt.Println("Hello from new goroutine", time.Since(start))
 	}()
 	fmt.Println("Before sleep", time.Since(start))
