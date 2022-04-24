@@ -5,6 +5,7 @@ import "sync"
 //gunakan channel untuk memberpaiki masalah race condition!
 func counter(output chan<- int) {
 	// TODO: answer here
+	mu := &sync.Mutex{}
 	var wg sync.WaitGroup
 	count := 0
 	for i := 0; i < 1000; i++ {
@@ -13,8 +14,10 @@ func counter(output chan<- int) {
 			defer wg.Done()
 			// TODO: answer here
 			//kirim 1 ke channel
+			mu.Lock()
 			count++
 			// TODO: answer here
+			mu.Unlock()
 		}()
 	}
 	wg.Wait()
