@@ -14,8 +14,8 @@ func counter(output chan<- int) {
 		go func() {
 			defer wg.Done()
 			//kirim 1 ke channel
-			c <- 1
 			// TODO: answer here
+			c <- 1
 		}()
 	}
 	//mengubah nilai count menggunakan data dari channel
