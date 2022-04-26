@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -30,16 +31,22 @@ func (s *semaphore) Release() {
 
 //kita bisa lihat hanya ada 10 goroutine yang berjalan dalam satu waktu
 func main() {
+	// mu := &sync.Mutex{}
+	var wg sync.WaitGroup
 	semaphore := newSemaphore(10) // kita ingin hanya ada 10 akses dalam satu waktu
 	for i := 1; i <= 30; i++ {
 		semaphore.Acquire()
+		wg.Add(1)
 		go func(i int) {
+			defer wg.Done()
 			defer semaphore.Release()
 			longRunningProcess(i)
 		}(i)
 	}
 	//kapan terjadi blocking pada program ini ?
 	// TODO: answer here
+	wg.Wait()
+
 }
 
 func longRunningProcess(taskID int) {
