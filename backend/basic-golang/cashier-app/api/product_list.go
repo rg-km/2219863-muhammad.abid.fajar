@@ -19,12 +19,20 @@ type ProductListSuccessResponse struct {
 	Products []Product `json:"products"`
 }
 
-// todo 1 buah kelar
 func (api *API) productList(w http.ResponseWriter, req *http.Request) {
-	products, err := api.productsRepo.SelectAll()
+	api.AllowOrigin(w, req)
 	encoder := json.NewEncoder(w)
+	// _, err := api.AuthMiddleWare(w, req)
+	// if err != nil {
+	// 	w.WriteHeader(http.StatusUnauthorized)
+	// 	encoder.Encode(ProductListErrorResponse{Error: err.Error()})
+	// 	return
+	// }
+
 	response := ProductListSuccessResponse{}
 	response.Products = make([]Product, 0)
+
+	products, err := api.productsRepo.SelectAll()
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -32,12 +40,11 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 	}()
-	for _, product := range products {
-		response.Products = append(response.Products, Product{
-			Name:     product.ProductName,
-			Price:    product.Price,
-			Category: product.Category,
-		})
+	if err != nil {
+		return
 	}
-	encoder.Encode(response)
+
+	// fmt.Println(products)
+
+	encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
 }
