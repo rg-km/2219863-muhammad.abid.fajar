@@ -81,7 +81,7 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 
 	// Task: Return response berupa username dan token JWT yang sudah login
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: claims.Username, Token: tokenString}) // TODO: replace this
+	encoder.Encode(LoginSuccessResponse{Username: claims.Username, Token: tokenString}) // TODO: replace this
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
