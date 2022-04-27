@@ -33,8 +33,12 @@ func Routes() *http.ServeMux {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		fmt.Println(c)
-		w.Write([]byte("Tokenmu adalah abcdef!")) // TODO: replace this
+		if c.Name == "" {
+			http.Error(w, "Cookie not found", http.StatusUnauthorized)
+			return
+		}
+
+		fmt.Fprintf(w, "Tokenmu adalah %s!", c.Value,)
 	})
 
 	return mux
