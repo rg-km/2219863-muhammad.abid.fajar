@@ -65,11 +65,7 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
-	cartItems, err := u.LoadOrCreate()
-	if err != nil {
-		return nil, err
-	}
-	return cartItems, nil
+	return []CartItem{}, nil // TODO: replace this
 }
 
 func (u *CartItemRepository) Add(product Product) error {
@@ -77,44 +73,14 @@ func (u *CartItemRepository) Add(product Product) error {
 	if err != nil {
 		return err
 	}
-	flag := false
-	for i := 0; i < len(cartItems); i++ {
-		if cartItems[i].ProductName == product.ProductName {
-			flag = true
-			cartItems[i].Quantity++
-			return u.Save(cartItems)
-		}
-	}
-	if flag == false {
-		cartItems = append(cartItems, CartItem{
-			Category:    product.Category,
-			ProductName: product.ProductName,
-			Price:       product.Price,
-			Quantity:    1,
-		})
-	}
-	return u.Save(cartItems)
+
+	return nil // TODO: replace this
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
-	cartItems, err := u.LoadOrCreate()
-	if err != nil {
-		return err
-	}
-	cartItems = nil
-
-	return u.Save(cartItems)
+	return nil // TODO: replace this
 }
 
 func (u *CartItemRepository) TotalPrice() (int, error) {
-	cartItems, err := u.LoadOrCreate()
-	if err != nil {
-		return 0, err
-	}
-	var total int
-
-	for i := 0; i < len(cartItems); i++ {
-		total += cartItems[i].Price * cartItems[i].Quantity
-	}
-	return total, nil
+	return 0, nil // TODO: replace this
 }
