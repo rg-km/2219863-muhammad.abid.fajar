@@ -169,10 +169,10 @@ var _ = Describe("Api", func() {
 				cartListSuccessResponse := api.CartListSuccessResponse{}
 				json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-				// Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
-				// Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-				// Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
-				// Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+				Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
+				Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+				Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
+				Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
 			})
 
 			When("there are multiple similar product", func() {
@@ -214,10 +214,10 @@ var _ = Describe("Api", func() {
 					cartListSuccessResponse := api.CartListSuccessResponse{}
 					json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-					// Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
-					// Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-					// Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(2))
-					// Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+					Expect(cartListSuccessResponse.CartItems).To(HaveLen(1))
+					Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+					Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(2))
+					Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
 				})
 			})
 
@@ -260,15 +260,15 @@ var _ = Describe("Api", func() {
 					cartListSuccessResponse := api.CartListSuccessResponse{}
 					json.NewDecoder(wr.Body).Decode(&cartListSuccessResponse)
 
-					// Expect(cartListSuccessResponse.CartItems).To(HaveLen(2))
+					Expect(cartListSuccessResponse.CartItems).To(HaveLen(2))
 
-					// Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
-					// Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
-					// Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
+					Expect(cartListSuccessResponse.CartItems[0].ProductName).To(Equal("Tomato"))
+					Expect(cartListSuccessResponse.CartItems[0].Quantity).To(Equal(1))
+					Expect(cartListSuccessResponse.CartItems[0].Price).To(Equal(2200))
 
-					// Expect(cartListSuccessResponse.CartItems[1].ProductName).To(Equal("Tea"))
-					// Expect(cartListSuccessResponse.CartItems[1].Quantity).To(Equal(1))
-					// Expect(cartListSuccessResponse.CartItems[1].Price).To(Equal(2700))
+					Expect(cartListSuccessResponse.CartItems[1].ProductName).To(Equal("Tea"))
+					Expect(cartListSuccessResponse.CartItems[1].Quantity).To(Equal(1))
+					Expect(cartListSuccessResponse.CartItems[1].Price).To(Equal(2700))
 				})
 			})
 		})
