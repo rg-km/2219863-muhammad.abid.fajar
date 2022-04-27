@@ -77,7 +77,8 @@ func Routes() *http.ServeMux {
 			Value:   tokenString,
 			Expires: expirationTime,
 		})
-		w.Write([]byte("Login Success"))
+		w.Write([]byte(`Error parsing basic auth`))
+		return
 	})
 
 	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
@@ -86,32 +87,64 @@ func Routes() *http.ServeMux {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
-
+		c, err := r.Cookie("token")
+		if err != nil {
+			if err == http.ErrNoCookie {
+				// return unauthorized ketika token kosong
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			// return bad request ketika field token tidak ada
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 		// Task: Ambil value dari cookie token
-
 		// TODO: answer here
+		tknStr := c.Value
 
 		// Task: Deklarasi variable claim
-
 		// TODO: answer here
+		claims := &Claims{}
 
 		// Task: 1. Parse JWT token ke dalam claim
 		//       2. return unauthorized ketika ada kesalahan ketika parsing token
 		//	     3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
 		// Task: return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
-
 		// TODO: answer here
+		if !tkn.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		// Task: return unauthorized ketika role user tidak sesuai dengan role admin
-
 		// TODO: answer here
+		if claims.Role != "admin" {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		// Task: return data dalam claim, seperti username yang telah didefinisikan
-
 		// TODO: answer here
+		claims = &Claims{
+			Username: claims.Username,
+			Role:     claims.Role,
+		}
+		w.Write([]byte(`Welcome Admin user2!`))
+		return
 	})
 
 	mux.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) {
@@ -120,28 +153,57 @@ func Routes() *http.ServeMux {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+		c, err := r.Cookie("token")
+		if err != nil {
+			if err == http.ErrNoCookie {
+				// return unauthorized ketika token kosong
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			// return bad request ketika field token tidak ada
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
 		// Task: Ambil value dari cookie token
-
 		// TODO: answer here
+		tknStr := c.Value
 
 		// Task: Deklarasi variable claim
-
 		// TODO: answer here
+		claims := &Claims{}
 
 		// Task: 1. Parse JWT token ke dalam claim
 		//       2. return unauthorized ketika ada kesalahan ketika parsing token
 		//	     3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+		if err != nil {
+			if err == jwt.ErrSignatureInvalid {
+				w.WriteHeader(http.StatusUnauthorized)
+				return
+			}
+			w.WriteHeader(http.StatusBadRequest)
+			return
+		}
 
 		// Task: return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
-
 		// TODO: answer here
+		if !tkn.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
 
 		// Task: return data dalam claim, seperti username yang telah didefinisikan
-
 		// TODO: answer here
+		claims = &Claims{
+			Username: claims.Username,
+			Role:     claims.Role,
+		}
+		return
 	})
 
 	return mux
