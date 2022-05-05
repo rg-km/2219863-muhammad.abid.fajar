@@ -18,6 +18,7 @@ func (c *character) awake(movementInput, attackInput chan string) {
 		//fmt.Printf("%s %s\n", c.name, c.defaultActivity)
 		//time.Sleep(100 * time.Millisecond)
 		// TODO: answer here
+<<<<<<< HEAD
 		select {
 		case c.activity = <-attackInput:
 			fmt.Printf("%s melakukan serangan %s\n", c.name, c.activity)
@@ -27,5 +28,8 @@ func (c *character) awake(movementInput, attackInput chan string) {
 			fmt.Printf("%s %s\n", c.name, c.defaultActivity)
 			time.Sleep(100 * time.Millisecond)
 		} 
+=======
+
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	}
 }

@@ -49,6 +49,7 @@ func main() {
 }
 
 func updateJSON(fileName string, newData []student) ([]student, error) {
+<<<<<<< HEAD
 	path, err := filepath.Abs(fileName + ".json")
 	if err != nil {
 		return nil, err
@@ -66,6 +67,9 @@ func updateJSON(fileName string, newData []student) ([]student, error) {
 	jsonData, _ := json.Marshal(students) //menulis ke JSON
 	ioutil.WriteFile(path, jsonData, 0644)
 	return students, nil // TODO: replace this
+=======
+	return []student{}, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func openFile(path string) (*os.File, error) {

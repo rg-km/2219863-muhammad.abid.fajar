@@ -1,9 +1,13 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 	"strings"
 )
+=======
+import "fmt"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 func main() {
 	/*
@@ -42,5 +46,9 @@ func IsExistInSource(source, search string) bool {
 }
 
 func IsExistInSourceCorrect(source, search string) bool {
+<<<<<<< HEAD
 	return strings.Contains(source, search) // TODO: replace this
+=======
+	return false // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

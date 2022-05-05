@@ -17,7 +17,11 @@ func main() {
 	fmt.Println(res)
 
 	// Try correct answer:
+<<<<<<< HEAD
 	// resCorrect := ConvertSecondToTimeStringCorrect(800)
+=======
+	// resCorrect := ConvertSecondToTimeStringCorrect(arr)
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	// fmt.Println(resCorrect)
 }
 
@@ -30,6 +34,7 @@ func ConvertSecondToTimeString(second int) string {
 }
 
 func ConvertSecondToTimeStringCorrect(second int) string {
+<<<<<<< HEAD
 	// return "" // TODO: replace this
 
 	hours := second / 3600
@@ -54,4 +59,7 @@ func ConvertSecondToTimeStringCorrect(second int) string {
 		timeString := fmt.Sprintf("%d:%d:%d", hours, minutes, second)
 		return timeString
 	}
+=======
+	return "" // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

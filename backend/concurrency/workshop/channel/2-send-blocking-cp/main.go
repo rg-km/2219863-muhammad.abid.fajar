@@ -9,12 +9,18 @@ func sendBlock(output chan bool) {
 		fmt.Println("receive from main")
 		//memberi called nilai dari channel c
 		// TODO: answer here
+<<<<<<< HEAD
 		called = <-c
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	}()
 
 	//mengirim bool value true ke channel c
 	// TODO: answer here
+<<<<<<< HEAD
 	c <- true
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	output <- called
 	fmt.Println(c) //agar variabel c digunakan
 }

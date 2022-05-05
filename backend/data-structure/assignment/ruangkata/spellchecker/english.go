@@ -2,7 +2,10 @@ package spellchecker
 
 import (
 	"bufio"
+<<<<<<< HEAD
 	"fmt"
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	"os"
 	"strings"
 
@@ -50,6 +53,7 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 }
 
 func (s *spellchecker) CheckWord(word string) bool {
+<<<<<<< HEAD
 	var d []string
 	c, _ := parseFile()
 	for v, _ := range c {
@@ -91,4 +95,11 @@ func (s *spellchecker) CheckSentence(sentence string) ([]string, []string) {
 	}
 
 	return validWords, invalidWords // TODO: replace this
+=======
+	return false // TODO: replace this
+}
+
+func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
+	return nil, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

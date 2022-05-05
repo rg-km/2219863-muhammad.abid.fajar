@@ -104,6 +104,7 @@ func main() {
 }
 
 func (q Queue) InsertRear(rearValue string) (Queue, error) {
+<<<<<<< HEAD
 	if f >= n {
 		return nil, fmt.Errorf("Overflow")
 	}
@@ -122,10 +123,13 @@ func (q Queue) InsertRear(rearValue string) (Queue, error) {
 		f = 0
 	}
 	//
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return q, nil // TODO: replace this
 }
 
 func (q Queue) InsertFront(frontValue string) (Queue, error) {
+<<<<<<< HEAD
 	if f >= n {
 		return nil, fmt.Errorf("element cannot be inserted")
 	}
@@ -140,6 +144,8 @@ func (q Queue) InsertFront(frontValue string) (Queue, error) {
 		f = 0
 	}
 	//
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return q, nil // TODO: replace this
 }
 

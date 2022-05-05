@@ -1,8 +1,11 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"fmt"
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
@@ -35,12 +38,20 @@ var _ = Describe("Main", func() {
 			fileName := "bookAuthor.txt"
 			err := ScanToMap(mapData, fileName)
 			Expect(err).To(BeNil())
+<<<<<<< HEAD
 			fmt.Print(mapData)
 		// 	Expect(mapData).To(HaveLen(8))
 		// 	Expect(mapData["Epictetus"]).To(Equal("Enchiridion"))
 		// 	Expect(mapData["Henry Marampiring"]).To(Equal("Filosofi Teras"))
 		// 	Expect(mapData["Leonhard Euler"]).To(Equal("Elements of Algebra"))
 		// 	Expect(mapData["Isaac Newton"]).To(Equal("Principia"))
+=======
+			Expect(mapData).To(HaveLen(8))
+			Expect(mapData["Epictetus"]).To(Equal("Enchiridion"))
+			Expect(mapData["Henry Marampiring"]).To(Equal("Filosofi Teras"))
+			Expect(mapData["Leonhard Euler"]).To(Equal("Elements of Algebra"))
+			Expect(mapData["Isaac Newton"]).To(Equal("Principia"))
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		})
 	})
 })

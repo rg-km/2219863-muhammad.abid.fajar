@@ -65,11 +65,15 @@ func (u *CartItemRepository) Save(cartItems []CartItem) error {
 }
 
 func (u *CartItemRepository) SelectAll() ([]CartItem, error) {
+<<<<<<< HEAD
 	cartItems, err := u.LoadOrCreate()
 	if err != nil {
 		return nil, err
 	}
 	return cartItems, nil
+=======
+	return []CartItem{}, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func (u *CartItemRepository) Add(product Product) error {
@@ -77,6 +81,7 @@ func (u *CartItemRepository) Add(product Product) error {
 	if err != nil {
 		return err
 	}
+<<<<<<< HEAD
 	flag := false
 	for i := 0; i < len(cartItems); i++ {
 		if cartItems[i].ProductName == product.ProductName {
@@ -117,4 +122,16 @@ func (u *CartItemRepository) TotalPrice() (int, error) {
 		total += cartItems[i].Price * cartItems[i].Quantity
 	}
 	return total, nil
+=======
+
+	return nil // TODO: replace this
+}
+
+func (u *CartItemRepository) ResetCartItems() error {
+	return nil // TODO: replace this
+}
+
+func (u *CartItemRepository) TotalPrice() (int, error) {
+	return 0, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

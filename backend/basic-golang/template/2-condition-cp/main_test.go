@@ -14,11 +14,15 @@ var _ = Describe("Account", func() {
 				Balance: 1000,
 			}
 			b, err := ExecuteToByteBuffer(account)
+<<<<<<< HEAD
 			// fmt.Println(err)
 			Expect(err).ShouldNot(HaveOccurred())
 			// c := string(b)
 			// fmt.Println(c)
 			// Expect(string(b)).To(Equal(c))
+=======
+			Expect(err).ShouldNot(HaveOccurred())
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			Expect(string(b)).To(Equal("Akun Tony dengan Nomor 1002321 memiliki saldo sebesar $1000."))
 		})
 		It("return slice of bytes with empty state wording", func() {
@@ -28,12 +32,16 @@ var _ = Describe("Account", func() {
 				Balance: 0,
 			}
 			b, err := ExecuteToByteBuffer(account)
+<<<<<<< HEAD
 			// fmt.Println(err)
 			Expect(err).ShouldNot(HaveOccurred())
 
 			// c := string(b)
 			// fmt.Println(c)
 			// Expect(string(b)).To(Equal(c))
+=======
+			Expect(err).ShouldNot(HaveOccurred())
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			Expect(string(b)).To(Equal("Akun Tony dengan Nomor 1002321 tidak memiliki saldo."))
 		})
 	})

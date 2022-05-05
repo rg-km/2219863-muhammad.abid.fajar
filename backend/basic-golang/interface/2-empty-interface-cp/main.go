@@ -11,6 +11,7 @@ import "fmt"
 func GetMenu() []map[string]interface{} {
 	var menu []map[string]interface{}
 
+<<<<<<< HEAD
 	makanan := make(map[string]interface{})
 	makanan["Nama"] = "Ayam Goreng"
 	makanan["Jenis"] = "Cepat saji"
@@ -46,6 +47,15 @@ func GetMenu() []map[string]interface{} {
 	}
 
 	menu = append(menu, makanan, minuman)
+	return menu
+}
+
+func main() {
+	menu := GetMenu()
+=======
+	// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
+
 	return menu
 }
 

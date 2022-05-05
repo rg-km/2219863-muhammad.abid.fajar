@@ -18,6 +18,7 @@ func (s Scores) Len() int {
 }
 
 func (s Scores) Less(i, j int) bool {
+<<<<<<< HEAD
 	//return false // TODO: replace this
 	var total1, total2 int
 	//	data := make(map[string]int)
@@ -37,6 +38,9 @@ func (s Scores) Less(i, j int) bool {
 	} else {
 		return total1 > total2
 	}
+=======
+	return false // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func (s Scores) Swap(i, j int) {
@@ -46,7 +50,10 @@ func (s Scores) Swap(i, j int) {
 func (s Scores) TopStudents() []string {
 	sort.Sort(s)
 	names := []string{}
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	for _, score := range s {
 		names = append(names, score.Name)
 	}
@@ -61,7 +68,10 @@ func main() {
 		{"Ega", 3, 0, 7},
 		{"Anton", 2, 0, 5},
 	})
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	sort.Sort(scores)
 	fmt.Println(scores.TopStudents())
 }

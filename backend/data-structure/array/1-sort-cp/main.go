@@ -25,6 +25,7 @@ func main() {
 }
 
 func Sort(arr []int) []int {
+<<<<<<< HEAD
 	swapped := false //Untuk memeriksa apakah array sudah diurutkan; kemudian return;
 	for i := 0; i < len(arr)-1; i++ {
 		for j := 0; j < len(arr)-1; j++ {
@@ -48,4 +49,11 @@ func RotateLeft(d int, arr []int) []int {
 		arr = append(arr, left)
 	}
 	return arr // TODO: replace this
+=======
+	return []int{} // TODO: replace this
+}
+
+func RotateLeft(d int, arr []int) []int {
+	return []int{} // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

@@ -19,6 +19,7 @@ func WriteToCSV(fileName string, records []Menu) error {
 	defer csvFile.Close()
 
 	// TODO: answer here
+<<<<<<< HEAD
 	csvWriter := csv.NewWriter(csvFile)
 	defer csvWriter.Flush()
 
@@ -29,5 +30,7 @@ func WriteToCSV(fileName string, records []Menu) error {
 			return err
 		}
 	}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return nil
 }

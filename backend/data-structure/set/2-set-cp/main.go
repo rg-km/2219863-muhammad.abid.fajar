@@ -22,6 +22,7 @@ func (s *Set) Add(elem string) {
 
 // Delete - menghapus elemen dari set
 func (s *Set) Delete(elem string) (bool, error) {
+<<<<<<< HEAD
 	for k := range s.Elements {
 		if k == elem {
 			delete(s.Elements, elem)
@@ -29,16 +30,22 @@ func (s *Set) Delete(elem string) (bool, error) {
 		}
 	}
 	return false, fmt.Errorf("delete failed!, element Aditira is not in the set") // TODO: replace this
+=======
+	return fmt.Errorf("replace this with your code") // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 // Contains - memeriksa apakah elemen ada dalam set
 func (s *Set) Contains(elem string) bool {
+<<<<<<< HEAD
 	for k := range s.Elements {
 		if k == elem {
 			fmt.Print("Aditira is in the set")
 			return true
 		}
 	}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return false // TODO: replace this
 }
 

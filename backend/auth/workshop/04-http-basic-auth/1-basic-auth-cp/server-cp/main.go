@@ -21,28 +21,40 @@ func Routes() *http.ServeMux {
 		u, p, ok := r.BasicAuth()
 		if !ok {
 			// TODO: answer here
+<<<<<<< HEAD
 			w.WriteHeader(http.StatusUnauthorized)
 			w.Write([]byte(`Error parsing basic auth`))
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			return
 		}
 		if u != username {
 			// TODO: answer here
+<<<<<<< HEAD
 			w.WriteHeader(http.StatusUnauthorized)
 			w.Write([]byte(`{"message": "Invalid username"}`))
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			return
 		}
 		if p != password {
 			// TODO: answer here
+<<<<<<< HEAD
 			w.WriteHeader(http.StatusUnauthorized)
 			w.Write([]byte(`{"message": "Invalid password"}`))
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			return
 		}
 		fmt.Printf("Username: %s\n", u)
 		fmt.Printf("Password: %s\n", p)
 
 		// TODO: answer here
+<<<<<<< HEAD
 		w.WriteHeader(http.StatusOK)
 		w.Write([]byte(`{"message": "welcome to CAMP 2022!"}`))
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	return mux

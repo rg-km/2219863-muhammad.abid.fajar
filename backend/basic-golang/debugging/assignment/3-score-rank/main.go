@@ -41,6 +41,7 @@ func ScoreRank(score int) string {
 }
 
 func ScoreRankCorrect(score int) string {
+<<<<<<< HEAD
 	if score > 100 || score < 0 {
 		return "INVALID"
 	}
@@ -58,4 +59,7 @@ func ScoreRankCorrect(score int) string {
 	}
 
 	return rank
+=======
+	return "" // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

@@ -47,11 +47,15 @@ func NewMusicPlayer() MusicPlayer {
 
 func (mp *MusicPlayer) AddSong(song Song) {
 	// TODO: answer here
+<<<<<<< HEAD
 	mp.Playlist.Songs = append(mp.Playlist.Songs, song)
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func (mp *MusicPlayer) Play() string {
 	// TODO: answer here
+<<<<<<< HEAD
 	if mp.Playlist.IsEmpty() {
 		return ""
 	}
@@ -63,12 +67,17 @@ func (mp *MusicPlayer) Play() string {
 
 	return fmt.Sprintf("Now playing %s - %s", song.Singer, song.Title)
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func (p *Playlist) Repeat() {
 	// TODO: answer here
+<<<<<<< HEAD
 	p.IsRepeatable = true
 	if p.IsEmpty() {
 		return
 	}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

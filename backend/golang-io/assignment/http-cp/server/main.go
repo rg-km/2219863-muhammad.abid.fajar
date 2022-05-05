@@ -1,13 +1,20 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"net/http"
+=======
+	"fmt"
+	"net/http"
+	"strconv"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 )
 
 func Routes() *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		// TODO: answer here
+<<<<<<< HEAD
 		w.Write([]byte("Hello, world!"))
 	})
 
@@ -40,6 +47,17 @@ func Routes() *http.ServeMux {
 			w.Write([]byte(`{"message": "Hello, world!"}`))
 		}
 
+=======
+	})
+	mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
+		// TODO: answer here
+	})
+	mux.HandleFunc("/add", func(w http.ResponseWriter, r *http.Request) {
+		// TODO: answer here
+	})
+	mux.HandleFunc("/hellojson", func(w http.ResponseWriter, r *http.Request) {
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	return mux

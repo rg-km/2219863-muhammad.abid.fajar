@@ -22,6 +22,7 @@ func main() {
 }
 
 func Intersection(str1, str2 []string) (inter []string) {
+<<<<<<< HEAD
 	hash := make(map[string]bool)
     for _, e := range str1 {
         hash[e] = true
@@ -46,4 +47,11 @@ func RemoveDuplicates(elements []string) (nodups []string) {
         }
     }
     return // TODO: replace this
+=======
+	return []string{} // TODO: replace this
+}
+
+func RemoveDuplicates(elements []string) (nodups []string) {
+	return []string{} // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

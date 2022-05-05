@@ -16,10 +16,14 @@ var _ = Describe("Goroutine", func() {
 				//jalankan goroutine yang melakukan print untuk tiap hasil perkalian i*i dalam loop
 				//dan menambahkan hasil tersebut ke variable result
 				// TODO: answer here
+<<<<<<< HEAD
 				go func(i int) {
 					i *= i
 					result += i
 				}(i)
+=======
+
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			}
 			time.Sleep(10 * time.Millisecond)
 			fmt.Println("main stop")

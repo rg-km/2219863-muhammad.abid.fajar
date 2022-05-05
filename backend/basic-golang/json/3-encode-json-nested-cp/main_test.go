@@ -1,8 +1,11 @@
 package main_test
 
 import (
+<<<<<<< HEAD
 	"fmt"
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
@@ -35,8 +38,11 @@ var _ = Describe("JSON Encode", func() {
 			}}
 			meja := jsonencode.NewMeja(items)
 			result := meja.EncodeJSON()
+<<<<<<< HEAD
 			fmt.Print(result)
 			// Expect(result).To(Equal(result))
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 			Expect(result).To(Equal(`[{"jenis":"Meja Makan","warna":"Coklat","jumlah":20,"ukuran":{"panjang":"50 cm","tinggi":"25 cm"}},{"jenis":"Meja Lipat","warna":"Hitam","jumlah":1,"ukuran":{"panjang":"70 cm","tinggi":"30 cm"}}]`))
 		})
 	})

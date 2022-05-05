@@ -25,12 +25,16 @@ type Leaderboard struct {
 
 func CalculateScore(leaderboard Leaderboard) int {
 	// TODO: answer here
+<<<<<<< HEAD
 	return 0
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
+<<<<<<< HEAD
 	textTemplate = `{{range . }}{{ .Name }}: {{ .Score }}{{else}} Invalid "struct" Users harus berupa array!{{end}}` + `Total Score: 4000`
 	tmpl, err := template.New("test").Parse(textTemplate)
 	if err != nil {
@@ -43,4 +47,6 @@ func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
 	}
 
 	return a.Bytes(), nil
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

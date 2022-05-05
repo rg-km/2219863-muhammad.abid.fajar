@@ -11,14 +11,21 @@ import (
 // Pada setiap loop, cetak "Peringkat ke-n: Nama", contoh: "Peringkat ke-1: Roger"
 
 type UserRank struct {
+<<<<<<< HEAD
 	Name string
 	Rank int
+=======
+	Name  string
+	Email string
+	Rank  int
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 type Leaderboard struct {
 	Users []*UserRank
 }
 
+<<<<<<< HEAD
 // Peringkat ke-1: RogerPeringkat ke-2: TonyPeringkat ke-3: BrucePeringkat ke-4: NatashaPeringkat ke-5: Clint
 func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
 	// TODO: answer here
@@ -34,4 +41,9 @@ func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
 	}
 
 	return a.Bytes(), nil
+=======
+func ExecuteToByteBuffer(leaderboard Leaderboard) ([]byte, error) {
+	var textTemplate string
+	// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

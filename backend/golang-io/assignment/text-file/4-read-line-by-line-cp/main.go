@@ -3,8 +3,13 @@ package main
 import (
 	"bufio"
 	"fmt"
+<<<<<<< HEAD
 	"io"
 	"os"
+=======
+	"os"
+	"strings"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 )
 
 func main() {
@@ -12,6 +17,7 @@ func main() {
 }
 
 func ScanToArray(arr *[]string, fileName string) error {
+<<<<<<< HEAD
 	file, err := os.Open(fileName)
 	if err != nil {
 		return err
@@ -25,10 +31,13 @@ func ScanToArray(arr *[]string, fileName string) error {
 		}
 		*arr = append(*arr, string(line))
 	}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return nil // TODO: replace this
 }
 
 func ScanToMap(dataMap map[string]string, fileName string) error {
+<<<<<<< HEAD
 
 	file, err := os.Open(fileName)
 	if err != nil {
@@ -45,5 +54,7 @@ func ScanToMap(dataMap map[string]string, fileName string) error {
 		dataMap[c[i]] = c[i+1]
 	}
 
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return nil // TODO: replace this
 }

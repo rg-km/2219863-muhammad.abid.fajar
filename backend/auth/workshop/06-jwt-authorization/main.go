@@ -23,6 +23,7 @@ func Routes() *http.ServeMux {
 	mux.HandleFunc("/signin", func(w http.ResponseWriter, r *http.Request) {
 		var creds Credentials
 		// JSON body diconvert menjadi creditial struct & return bad request ketika terjadi kesalahan decoding json
+<<<<<<< HEAD
 		// TODO: answer here
 		err := json.NewDecoder(r.Body).Decode(&creds)
 		if err != nil {
@@ -39,12 +40,21 @@ func Routes() *http.ServeMux {
 			w.Write([]byte("user credential invalid"))
 			return
 		}
+=======
+
+		// TODO: answer here
+
+		// Task: Ambil password dari username yang dipakai untuk login & return unauthorized jika password salah
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. Deklarasi expiry time untuk token jwt
 		// 		 2. Buat claim menggunakan variable yang sudah didefinisikan diatas
 		//       3. Expiry time menggunakan time millisecond
 
 		// TODO: answer here
+<<<<<<< HEAD
 		expirationTime := time.Now().Add(5 * time.Minute)
 
 		// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
@@ -57,11 +67,18 @@ func Routes() *http.ServeMux {
 				ExpiresAt: expirationTime.Unix(),
 			},
 		}
+=======
+
+		// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
 		//       2. Buat return internal error ketika ada kesalahan ketika pembuatan JWT string
 
 		// TODO: answer here
+<<<<<<< HEAD
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 		tokenString, err := token.SignedString(jwtKey)
 		if err != nil {
@@ -79,6 +96,12 @@ func Routes() *http.ServeMux {
 		})
 		w.Write([]byte(`Error parsing basic auth`))
 		return
+=======
+
+		// Task: Set token string kedalam cookie response
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	mux.HandleFunc("/admin", func(w http.ResponseWriter, r *http.Request) {
@@ -87,6 +110,7 @@ func Routes() *http.ServeMux {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+<<<<<<< HEAD
 		c, err := r.Cookie("token")
 		if err != nil {
 			if err == http.ErrNoCookie {
@@ -105,12 +129,23 @@ func Routes() *http.ServeMux {
 		// Task: Deklarasi variable claim
 		// TODO: answer here
 		claims := &Claims{}
+=======
+
+		// Task: Ambil value dari cookie token
+
+		// TODO: answer here
+
+		// Task: Deklarasi variable claim
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. Parse JWT token ke dalam claim
 		//       2. return unauthorized ketika ada kesalahan ketika parsing token
 		//	     3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+<<<<<<< HEAD
 		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
@@ -145,6 +180,20 @@ func Routes() *http.ServeMux {
 		}
 		w.Write([]byte(`Welcome Admin user2!`))
 		return
+=======
+
+		// Task: return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
+
+		// TODO: answer here
+
+		// Task: return unauthorized ketika role user tidak sesuai dengan role admin
+
+		// TODO: answer here
+
+		// Task: return data dalam claim, seperti username yang telah didefinisikan
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	mux.HandleFunc("/profile", func(w http.ResponseWriter, r *http.Request) {
@@ -153,6 +202,7 @@ func Routes() *http.ServeMux {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+<<<<<<< HEAD
 		c, err := r.Cookie("token")
 		if err != nil {
 			if err == http.ErrNoCookie {
@@ -172,12 +222,23 @@ func Routes() *http.ServeMux {
 		// Task: Deklarasi variable claim
 		// TODO: answer here
 		claims := &Claims{}
+=======
+
+		// Task: Ambil value dari cookie token
+
+		// TODO: answer here
+
+		// Task: Deklarasi variable claim
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. Parse JWT token ke dalam claim
 		//       2. return unauthorized ketika ada kesalahan ketika parsing token
 		//	     3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+<<<<<<< HEAD
 		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
@@ -204,6 +265,16 @@ func Routes() *http.ServeMux {
 			Role:     claims.Role,
 		}
 		return
+=======
+
+		// Task: return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
+
+		// TODO: answer here
+
+		// Task: return data dalam claim, seperti username yang telah didefinisikan
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	return mux

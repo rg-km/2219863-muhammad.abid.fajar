@@ -18,7 +18,10 @@ func createRequest(workerInput, resultChan chan<- int, workerOutput <-chan int) 
 	for i := 1; i < 16; i++ {
 		var res int
 		// TODO: answer here
+<<<<<<< HEAD
 		res = i * i
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		resultSum += res
 		fmt.Printf("hasil pangkat 2 angka %d adalah: %d\n", i, res) // 0 1 4 9 16
 	}

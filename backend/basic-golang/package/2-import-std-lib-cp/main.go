@@ -1,8 +1,11 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"fmt"
 	"time"
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	// TODO: answer here
 )
 
@@ -11,10 +14,13 @@ import (
 
 func CountDays(start, end time.Time) int {
 	// TODO: answer here
+<<<<<<< HEAD
 	days := end.Sub(start).Hours()
 	var y int = int(days)
 
 	return y / 24
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func main() {

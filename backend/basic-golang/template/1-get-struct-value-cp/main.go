@@ -14,14 +14,18 @@ import (
 
 type Student struct {
 	// TODO: answer here
+<<<<<<< HEAD
 	Name         string
 	ScoreAverage float64
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 // main function
 func main() {
 	buff := new(bytes.Buffer)
 	// TODO: answer here
+<<<<<<< HEAD
 	std := Student{Name: "Rogu", ScoreAverage: 7.8}
 
 	// "New" membuat template baru
@@ -33,6 +37,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("parse error: %s", err.Error())
 	}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 	if err := tmp1.Execute(buff, std); err != nil {
 		log.Fatalf("execute template error: %s", err.Error())

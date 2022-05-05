@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+<<<<<<< HEAD
 	"log"
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 )
 
 func main() {
@@ -18,6 +21,7 @@ type FileData struct {
 }
 
 func ReadFile(name string) (FileData, error) {
+<<<<<<< HEAD
 	fileName := "./read.txt"
 	//membaca text file
 	data, err := ioutil.ReadFile(fileName)
@@ -32,4 +36,7 @@ func ReadFile(name string) (FileData, error) {
 	}
 
 	return f, nil // TODO: replace this
+=======
+	return FileData{}, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
