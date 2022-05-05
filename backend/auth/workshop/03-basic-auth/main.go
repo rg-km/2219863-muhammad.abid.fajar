@@ -25,6 +25,7 @@ func Routes() *http.ServeMux {
 		var creds Credentials
 
 		// Task:  Buat JSON body diconvert menjadi credential struct & return bad request ketika terjadi kesalahan decoding json
+<<<<<<< HEAD
 		// TODO: answer here
 		err := json.NewDecoder(r.Body).Decode(&creds)
 		if err != nil {
@@ -47,11 +48,24 @@ func Routes() *http.ServeMux {
 			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
+=======
+
+		// TODO: answer here
+
+		// Task: Ambil password dari username yang dipakai untuk login
+
+		// TODO: answer here
+
+		// Task: return unauthorized jika password salah
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. Buat token string menggunakan bcrypt dari credential username
 		// 		 2. return internal server error ketika terjadi kesalahan encrypting token
 
 		// TODO: answer here
+<<<<<<< HEAD
 		token, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)
@@ -66,6 +80,12 @@ func Routes() *http.ServeMux {
 			Expires: time.Now().Add(24 * time.Hour),
 		}
 		http.SetCookie(w, &cookie)
+=======
+
+		// Task: Set token string kedalam cookie response
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 
 	return mux

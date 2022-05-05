@@ -37,9 +37,13 @@
 
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 )
+=======
+import "fmt"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 func main() {
 	var students = []int{1, 1, 1, 0, 0, 1}
@@ -48,6 +52,7 @@ func main() {
 }
 
 func CountStudents(students []int, sandwiches []int) int {
+<<<<<<< HEAD
 	counter := [2]int{0, 0}
 	for _, n := range students {
 		counter[n]++
@@ -59,4 +64,7 @@ func CountStudents(students []int, sandwiches []int) int {
 		counter[n]--
 	}
 	return counter[0] + counter[1] // TODO: replace this
+=======
+	0 // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

@@ -36,6 +36,7 @@ func CalculateChange(totalPayment, totalPrice float64) float64 {
 }
 
 func CalculateChangeCorrect(totalPayment, totalPrice float64) float64 {
+<<<<<<< HEAD
 	if totalPayment < totalPrice && totalPrice != 100000 {
 		return -1
 	}
@@ -51,4 +52,7 @@ func CalculateChangeCorrect(totalPayment, totalPrice float64) float64 {
 		return -1
 	}
 	return change
+=======
+	return 0 // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

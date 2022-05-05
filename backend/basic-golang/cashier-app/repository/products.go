@@ -15,6 +15,7 @@ func NewProductRepository(db db.DB) ProductRepository {
 }
 
 func (u *ProductRepository) LoadOrCreate() ([]Product, error) {
+<<<<<<< HEAD
 	records, err := u.db.Load("products")
 	if err != nil {
 		records = [][]string{
@@ -50,3 +51,11 @@ func (u *ProductRepository) SelectAll() ([]Product, error) {
 	}
 	return product, nil
 }
+=======
+	return []Product{}, nil // TODO: replace this
+}
+
+func (u *ProductRepository) SelectAll() ([]Product, error) {
+	return []Product{}, nil // TODO: replace this
+}
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2

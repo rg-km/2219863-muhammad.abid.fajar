@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"time"
 
+<<<<<<< HEAD
 	helper "github.com/ruang-guru/playground/backend/concurrency/exercise/async-requests-cp/client/request"
+=======
+	helper "github.com/ruang-guru/playground/backend/concurrency/assignment/async-requests-cp/client/request"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 )
 
 var start time.Time

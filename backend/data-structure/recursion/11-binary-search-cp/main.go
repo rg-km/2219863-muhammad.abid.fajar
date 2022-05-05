@@ -15,6 +15,7 @@ func BinarySearch(numList []int64, key int64) int {
 
 	if low <= high {
 		// TODO: answer here
+<<<<<<< HEAD
 		mid := ((high + low) / 2)
 
 		if numList[mid] > key {
@@ -29,6 +30,8 @@ func BinarySearch(numList []int64, key int64) int {
 
 			return 1
 		}
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	}
 	return 0
 }

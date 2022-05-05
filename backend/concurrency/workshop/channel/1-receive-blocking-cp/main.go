@@ -9,6 +9,7 @@ func receiveBlock(output chan int) {
 		fmt.Println("send to channel c")
 		//kirim 1 ke channel c
 		// TODO: answer here
+<<<<<<< HEAD
 		c <- 1
 	}()
 
@@ -18,3 +19,12 @@ func receiveBlock(output chan int) {
 	output <- result
 	fmt.Println(c) //agar variabel c digunakan
 }
+=======
+	}()
+
+	//result menerima data dari channel c
+	// TODO: answer here
+	output <- result
+	fmt.Println(c) //agar variabel c digunakan
+}
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2

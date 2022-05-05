@@ -25,6 +25,7 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 
 		// TODO: answer here
+<<<<<<< HEAD
 		if r.FormValue("total") != "" {
 			total, err := strconv.Atoi(r.FormValue("total"))
 			if err != nil {
@@ -49,6 +50,9 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		http.Error(w, "invalid total", http.StatusNotFound)
+=======
+		http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		return
 	}
 

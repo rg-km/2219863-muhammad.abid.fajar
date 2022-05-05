@@ -27,6 +27,7 @@ func main() {
 }
 
 func AnagramsChecker(str1 string, str2 string) string {
+<<<<<<< HEAD
 	stoneMap := map[rune]bool{}
 	count := 0
 
@@ -44,4 +45,7 @@ func AnagramsChecker(str1 string, str2 string) string {
 	} else {
 		return "Anagram"
 	}
+=======
+	return "" // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

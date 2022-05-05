@@ -1,5 +1,10 @@
 package main
 
+<<<<<<< HEAD
+=======
+import "github.com/ruang-guru/playground/backend/data-structure/assignment/parentheses-validation/stack"
+
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 // Salah satu problem populer yang dapat diselesaikan dengan menggunakan Stack adalah mengecek validitas tanda kurung.
 // Diberikan sebuah string yang hanya terdapat karakter '(', ')', '{', '}', '[', dan ']'.
 // Tentukan apakah sebuah string merupakan sekumpulan tanda kurung yang valid.
@@ -24,6 +29,7 @@ package main
 
 func IsValidParentheses(s string) bool {
 	// TODO: answer here
+<<<<<<< HEAD
 	if len(s)%2 != 0 {
 		return false
 	}
@@ -53,4 +59,6 @@ func IsValidParentheses(s string) bool {
 	}
 
 	return len(st) == 0
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

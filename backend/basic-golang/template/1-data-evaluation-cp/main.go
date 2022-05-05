@@ -22,6 +22,7 @@ type Account struct {
 func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
+<<<<<<< HEAD
 	c := account
 	textTemplate = "Akun {{.Name}} dengan Nomor {{.Number}} memiliki saldo sebesar ${{.Balance}}."
 	tmpl, err := template.New("test").Parse(textTemplate) // ".FirstName" dan ".Age" adalah field name yang ada di struct User
@@ -35,4 +36,6 @@ func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	}
 
 	return b.Bytes(), nil
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

@@ -33,6 +33,7 @@ var _ = Describe("Employee", func() {
 			Expect(bonus).To(Equal(10000000))
 		})
 	})
+<<<<<<< HEAD
 	// Describe("Get Total Employee Bonus", func() {
 	// 	It("returns sum of employee bonus", func() {
 	// 		manager := Manager{
@@ -48,4 +49,21 @@ var _ = Describe("Employee", func() {
 	// 		Expect(totalBonus).To(Equal(100000000))
 	// 	})
 	// })
+=======
+	Describe("Get Total Employee Bonus", func() {
+		It("returns sum of employee bonus", func() {
+			manager := Manager{
+				BaseSalary: 20000000,
+			}
+			seniorEngineer := SeniorEngineer{
+				BaseSalary: 15000000,
+			}
+			juniorEngineer := JuniorEngineer{
+				BaseSalary: 10000000,
+			}
+			totalBonus := TotalEmployeeBonus([]Employee{manager, seniorEngineer, juniorEngineer})
+			Expect(totalBonus).To(Equal(100000000))
+		})
+	})
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 })

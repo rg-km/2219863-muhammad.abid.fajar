@@ -16,6 +16,7 @@ func NewUserRepository(db db.DB) UserRepository {
 }
 
 func (u *UserRepository) LoadOrCreate() ([]User, error) {
+<<<<<<< HEAD
 	record, err := u.db.Load("users")
 	if err != nil {
 		record = [][]string{
@@ -105,6 +106,29 @@ func (u *UserRepository) Save(users []User) error {
 		})
 	}
 	return u.db.Save("users", records)
+=======
+	return []User{}, nil // TODO: replace this
+}
+
+func (u *UserRepository) SelectAll() ([]User, error) {
+	return []User{}, nil // TODO: replace this
+}
+
+func (u UserRepository) Login(username string, password string) (*string, error) {
+	return nil, nil // TODO: replace this
+}
+
+func (u *UserRepository) FindLoggedinUser() (*string, error) {
+	return nil, nil // TODO: replace this
+}
+
+func (u *UserRepository) Logout(username string) error {
+	return nil // TODO: replace this
+}
+
+func (u *UserRepository) Save(users []User) error {
+	return nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func (u *UserRepository) changeStatus(username string, status bool) error {
@@ -112,6 +136,7 @@ func (u *UserRepository) changeStatus(username string, status bool) error {
 	if err != nil {
 		return err
 	}
+<<<<<<< HEAD
 	for i := 0; i < len(users); i++ {
 		if users[i].Username == username {
 			users[i].Loggedin = status
@@ -130,4 +155,12 @@ func (u *UserRepository) LogoutAll() error {
 		u.Logout(user.Username)
 	}
 	return nil
+=======
+
+	return nil // TODO: replace this
+}
+
+func (u *UserRepository) LogoutAll() error {
+	return nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

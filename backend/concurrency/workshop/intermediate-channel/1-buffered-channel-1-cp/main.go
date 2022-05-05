@@ -11,7 +11,10 @@ func testBuffer(output chan int) {
 	sum := 0
 	for i := 0; i < cap(input); i++ {
 		// TODO: answer here
+<<<<<<< HEAD
 		sum += i
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	}
 
 	output <- sum

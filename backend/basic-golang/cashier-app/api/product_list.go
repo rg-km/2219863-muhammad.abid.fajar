@@ -2,7 +2,10 @@ package api
 
 import (
 	"encoding/json"
+<<<<<<< HEAD
 	"fmt"
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	"net/http"
 )
 
@@ -45,6 +48,7 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
+<<<<<<< HEAD
 	fmt.Println(products)
 	for _, product := range products {
 		response.Products = append(response.Products, Product{
@@ -58,4 +62,9 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 	// encoder.Encode(ProductListSuccessResponse{Products: []Product{}})
 	// fmt.Println(products)
 
+=======
+	// fmt.Println(products)
+
+	encoder.Encode(ProductListSuccessResponse{Products: []Product{}}) // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

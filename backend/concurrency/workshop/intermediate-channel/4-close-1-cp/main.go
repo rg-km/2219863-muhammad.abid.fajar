@@ -6,7 +6,10 @@ func numberWorker(input chan int) {
 		input <- i
 	}
 	// TODO: answer here
+<<<<<<< HEAD
 	close(input)
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }
 
 func receiver(output chan int) {
@@ -16,5 +19,8 @@ func receiver(output chan int) {
 		output <- number
 	}
 	// TODO: answer here
+<<<<<<< HEAD
 	close(output)
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

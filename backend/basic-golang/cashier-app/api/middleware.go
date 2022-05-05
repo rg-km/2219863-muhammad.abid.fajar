@@ -33,6 +33,7 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
+<<<<<<< HEAD
 		c, err := r.Cookie("token")
 		if err != nil {
 			if err == http.ErrNoCookie {
@@ -52,6 +53,16 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		// Task: Deklarasi variable claim
 		// TODO: answer here
 		claims := &Claims{}
+=======
+
+		// Task: Ambil value dari cookie token
+
+		// TODO: answer here
+
+		// Task: Deklarasi variable claim
+
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 		// Task: 1. parse JWT token ke dalam claim
 		//       2. return unauthorized ketika signature invalid
@@ -59,6 +70,7 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       4. return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
 
 		// TODO: answer here
+<<<<<<< HEAD
 		tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtKey, nil
 		})
@@ -83,5 +95,11 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 		return  // TODO: replace this
+=======
+
+		// Task: Validasi
+
+		return next.ServeHTTP(w, r) // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	})
 }

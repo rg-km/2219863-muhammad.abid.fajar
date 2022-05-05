@@ -26,7 +26,10 @@ func Rotate(index int, args []int) []int {
 
 	if index == 0 {
 		// TODO: answer here
+<<<<<<< HEAD
 		args[0], args[len(args)-1] = args[len(args)-1], args[0]
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		return Rotate(1, args)
 	}
 

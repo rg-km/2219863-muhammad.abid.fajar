@@ -15,10 +15,14 @@
 
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 	"strings"
 )
+=======
+import "fmt"
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 
 func main() {
 	var sentences = []string{"Andi suka bermain bola", "Saya sedang belajar struktur data", "Terima kasih"}
@@ -27,6 +31,7 @@ func main() {
 
 func MostWordsFound(sentences []string) int {
 	ans := 0
+<<<<<<< HEAD
 	var a1,a2,a3 int
 	for i, sentence := range sentences {
 		max := CountWords(sentence)
@@ -45,10 +50,19 @@ func MostWordsFound(sentences []string) int {
 		ans = a2
 	} else {
 		ans = a3
+=======
+	for _, sentence := range sentences {
+		max := CountWords(sentence)
+		// TODO: answer here
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	}
 	return ans
 }
 
 func CountWords(sentence string) int {
+<<<<<<< HEAD
 	return strings.Count(sentence, " ") + 1
+=======
+	return 0 // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

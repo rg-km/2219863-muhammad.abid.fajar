@@ -16,4 +16,8 @@ var _ = Describe("JSON Encode", func() {
 			Expect(result).To(Equal(`{"jenis":"Meja Belajar","color":"green","jumlah":2}`))
 		})
 	})
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 })

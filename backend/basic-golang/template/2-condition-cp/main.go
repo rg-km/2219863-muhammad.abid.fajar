@@ -19,6 +19,7 @@ type Account struct {
 func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	var textTemplate string
 	// TODO: answer here
+<<<<<<< HEAD
 	textTemplate = `{{if (eq .Balance 0) }}Akun {{ .Name }} dengan Nomor {{.Number}} tidak memiliki saldo.{{else}}Akun {{ .Name }} dengan Nomor {{.Number}} memiliki saldo sebesar ${{.Balance}}.{{ end }}`
 
 	u := account // set value dari struct user dan disimpan ke variable u
@@ -33,4 +34,6 @@ func ExecuteToByteBuffer(account Account) ([]byte, error) {
 	}
 
 	return b.Bytes(), nil
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

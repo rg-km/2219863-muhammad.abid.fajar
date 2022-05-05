@@ -27,6 +27,7 @@ func main() {
 }
 
 func writeJSON(fileName string, data []student) error {
+<<<<<<< HEAD
 	path, err := filepath.Abs(fileName + ".json")
 	if err != nil {
 		return err
@@ -39,6 +40,8 @@ func writeJSON(fileName string, data []student) error {
 	jsonData, _ := json.Marshal(data)
 	ioutil.WriteFile(path, jsonData, 0644)
 	
+=======
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 	return nil // TODO: replace this
 }
 

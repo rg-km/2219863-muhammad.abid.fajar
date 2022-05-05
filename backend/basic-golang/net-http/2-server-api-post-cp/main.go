@@ -56,6 +56,7 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 	// logic handle POST request
 	if r.Method == "POST" {
 		// TODO: answer here
+<<<<<<< HEAD
 		g, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			panic(err)
@@ -71,6 +72,9 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 		for _, f := range d {
 			data = append(data, f)
 		}
+=======
+
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		// set header response code with status created/201
 		w.WriteHeader(http.StatusCreated)
 		// write json reponse body

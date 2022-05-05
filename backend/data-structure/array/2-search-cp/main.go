@@ -15,6 +15,7 @@ func main() {
 }
 
 func SearchMatch(arr1 []string, arr2 []string) ([]string, error) {
+<<<<<<< HEAD
 	var dummy []string
 	for _, v := range arr1 {
 		for _, l := range arr2 {
@@ -27,4 +28,7 @@ func SearchMatch(arr1 []string, arr2 []string) ([]string, error) {
 		return nil, fmt.Errorf("no match")
 	}
 	return dummy, nil // TODO: replace this
+=======
+	return []string{}, nil // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

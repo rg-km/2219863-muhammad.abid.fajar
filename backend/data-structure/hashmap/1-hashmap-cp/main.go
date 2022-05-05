@@ -14,6 +14,7 @@ func main() {
 }
 
 func AgeDistribution(people []Person) map[int]int {
+<<<<<<< HEAD
 	dummy := map[int]int{
 		22: 0,
 		21: 0, 
@@ -40,4 +41,11 @@ func FilterByAge(people []Person, age int) []Person {
 	}
 
 	return dummy
+=======
+	return map[int]int{} // TODO: replace this
+}
+
+func FilterByAge(people []Person, age int) []Person {
+	return []Person{} // TODO: replace this
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 }

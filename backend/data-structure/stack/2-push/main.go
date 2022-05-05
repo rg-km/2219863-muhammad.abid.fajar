@@ -24,7 +24,11 @@ type StackWithArray struct {
 }
 
 func (s *StackWithArray) Push(Elemen int) error {
+<<<<<<< HEAD
 	if s.Top == len(s.Data) {
+=======
+	if s.Top == len(s.Data)-1 {
+>>>>>>> 0a32055256f6fde63d12cce9d6bf4e9ec0eccbd2
 		return errors.New("stack overflow")
 	} else {
 		s.Top += 1
