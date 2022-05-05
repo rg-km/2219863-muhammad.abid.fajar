@@ -20,11 +20,26 @@ func TimeHandler() http.HandlerFunc {
 }
 
 func RequestMethodGetMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}) // TODO: replace this
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "GET" {
+			http.Error(w, "Method is not allowed.", http.StatusMethodNotAllowed)
+			return
+
+		}
+
+		next.ServeHTTP(w, r)
+	}) // TODO: replace this
 }
 
 func AdminMiddleware(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {}) // TODO: replace this
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Header.Get("role") != "ADMIN" {
+			http.Error(w, "role is not allowed", http.StatusUnauthorized)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+	}) // TODO: replace this
 }
 
 func main() {
