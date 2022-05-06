@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -27,16 +28,35 @@ var movies = map[int]Movie{
 }
 
 var MovieListHandler = func(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{}) // TODO: replace this
+	c.JSON(200, gin.H{}) // TODO: replace this
 }
 
 var MovieGetHandler = func(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{}) // TODO: replace this
+	no := c.Param("no")
+	g, err := strconv.Atoi(no)
+	if err != nil {
+		return
+	}
+	fmt.Println(no)
+	for k := 1; k <= len(movies); k++ {
+		if g >= len(movies) {
+			c.String(http.StatusNotFound, "data not found")
+			return
+		} else {
+			c.String(http.StatusOK, "{\"data\":{\"Title\":\"%s\"}}", movies[g].Title)
+			return
+		}
+	}
 }
 
 func GetRouter() *gin.Engine {
 	router := gin.Default()
 	// TODO: answer here
+	v1 := router.Group("/movie")
+	{
+		v1.GET("/list", MovieListHandler)
+		v1.GET("/get/:no", MovieGetHandler)
+	}
 	return router
 }
 
