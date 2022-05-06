@@ -33,11 +33,30 @@ var data = map[int]User{
 }
 
 func ProfileHandler() func(c *gin.Context) {
-	return func(c *gin.Context) {} // TODO: replace this
+	return func(c *gin.Context) {
+		no := c.Param("no")
+		g, err := strconv.Atoi(no)
+		if err != nil {
+			return
+		}
+		fmt.Println(no)
+		for k := 1; k <= len(data); k++ {
+			if g >= len(data) {
+				c.String(http.StatusNotFound, "data not found")
+				return
+			} else {
+				c.String(http.StatusOK, "Name: %s, Country: %s, Age: %d", data[g].Name, data[g].Country, data[g].Age)
+				return
+			}
+		}
+	}
 }
 
 func GetRouter() *gin.Engine {
-	return &gin.Engine{} // TODO: replace this
+	r := gin.Default()
+	r.GET("/profile/:no", ProfileHandler())
+
+	return r
 }
 
 func main() {
