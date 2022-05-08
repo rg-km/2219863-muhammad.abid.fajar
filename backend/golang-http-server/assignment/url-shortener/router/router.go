@@ -6,5 +6,7 @@ import (
 )
 
 func SetupRouter(urlHandler handlers.URLHandler) *gin.Engine {
-	return &gin.Engine{} // TODO: replace this
+	router := gin.Default()
+
+	return router // TODO: replace this
 }
