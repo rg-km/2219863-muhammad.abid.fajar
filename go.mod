@@ -12,10 +12,6 @@ require (
 	github.com/dgryski/dgoogauth v0.0.0-20190221195224-5a805980a5f3
 	github.com/gorilla/context v1.1.1
 	github.com/gorilla/mux v1.8.0
-	github.com/gorilla/pat v1.0.1
-	github.com/gorilla/sessions v1.2.1
-	github.com/markbates/goth v1.71.1
-	github.com/novalagung/gubrak/v2 v2.0.1
 	github.com/onsi/ginkgo v1.16.4
 	github.com/pkg/profile v1.6.0
 	github.com/prometheus/client_golang v1.12.1
@@ -24,7 +20,7 @@ require (
 	github.com/tsenart/vegeta/v12 v12.8.4
 	github.com/valyala/fastjson v1.6.3
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
-	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5
+	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8
 )
 
 require (
@@ -60,6 +56,9 @@ require (
 require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/gin-gonic/gin v1.7.7
+	github.com/golang-jwt/jwt/v4 v4.4.1
+	github.com/gorilla/pat v1.0.1
+	github.com/gorilla/sessions v1.2.1
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
