@@ -6,14 +6,10 @@ import (
 )
 
 func SetupRouter(urlHandler handlers.URLHandler) *gin.Engine {
-	router := gin.Default()
-
-	router.GET("/nonexist", func(c *gin.Context) {
-		c.String(404, "Error 404")
-	})
-	router.POST("/", urlHandler.Get)
-	router.POST("/custom", urlHandler.CreateCustom)
-	router.GET("/pawgrammers", urlHandler.Create)
-
-	return router // TODO: replace this
+	r := gin.Default()
+	r.GET("/:path", urlHandler.Get)
+	r.POST("/", urlHandler.Create)
+	r.POST("/:path", urlHandler.CreateCustom)
+	return r
+	//return &gin.Engine{} // TODO: replace this
 }
