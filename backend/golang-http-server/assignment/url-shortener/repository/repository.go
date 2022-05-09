@@ -19,8 +19,13 @@ func NewMapRepository() URLRepository {
 }
 
 func (r *URLRepository) Get(path string) (*entity.URL, error) {
+	if path == "" {
+		return nil, entity.ErrURLNotFound
+	}
+	var url *entity.URL
+	r.Data[path] = url.LongURL
 
-	return &entity.URL{} , nil // TODO: replace this
+	return url, nil // TODO: replace this
 }
 
 func (r *URLRepository) Create(longURL string) (*entity.URL, error) {
@@ -28,11 +33,9 @@ func (r *URLRepository) Create(longURL string) (*entity.URL, error) {
 		return nil, entity.ErrURLNotFound
 	}
 	var url *entity.URL
-	url.LongURL = longURL
 	url.ShortURL = entity.GetRandomShortURL(longURL)
-	
 
-	return url , nil // TODO: replace this
+	return url, nil // TODO: replace this
 }
 
 func (r *URLRepository) CreateCustom(longURL, customPath string) (*entity.URL, error) {
@@ -40,6 +43,5 @@ func (r *URLRepository) CreateCustom(longURL, customPath string) (*entity.URL, e
 		return nil, entity.ErrCustomURLIsExists
 	}
 
-
-	return &entity.URL{} , nil // TODO: replace this
+	return &entity.URL{}, nil // TODO: replace this
 }

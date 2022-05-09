@@ -22,15 +22,21 @@ func NewURLHandler(repo *repository.URLRepository) URLHandler {
 
 func (h *URLHandler) Get(c *gin.Context) {
 	// TODO: answer here
+	var g entity.URL
+	m , err := h.repo.Get(g.LongURL)
+	if err != nil {
+		return
+	}
+	h.repo.Data[m.LongURL] = m.LongURL
 }
 
 func (h *URLHandler) Create(c *gin.Context) {
 	var g entity.URL
 	m, err := h.repo.Create(g.LongURL)
 	if err != nil {
-		return 
+		return
 	}
-	h.repo.Data[m.LongURL] = m.ShortURL
+	h.repo.Data[m.LongURL] = m.LongURL
 	
 }
 
