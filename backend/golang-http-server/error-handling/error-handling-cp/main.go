@@ -18,14 +18,14 @@ var handler http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
 	if r.Method == http.MethodGet {
 		fmt.Println(data, "test data")
-		if data != nil && err == nil {
+		if len(data) < 1 && err == nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		} else if data != nil && err == nil {
 			w.WriteHeader(http.StatusOK)
 			return
-		} else if data != nil && err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			return
 		} else {
-			w.WriteHeader(http.StatusNotFound)
+			w.WriteHeader(http.StatusInternalServerError)
 			return
 		}
 	}
