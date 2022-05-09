@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"errors"
-	"net/http"
+	// "errors"
+	// "net/http"
 
 	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/entity"
 	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/repository"
@@ -25,7 +25,13 @@ func (h *URLHandler) Get(c *gin.Context) {
 }
 
 func (h *URLHandler) Create(c *gin.Context) {
-	// TODO: answer here
+	var g entity.URL
+	m, err := h.repo.Create(g.LongURL)
+	if err != nil {
+		return 
+	}
+	h.repo.Data[m.LongURL] = m.ShortURL
+	
 }
 
 func (h *URLHandler) CreateCustom(c *gin.Context) {

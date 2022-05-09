@@ -17,7 +17,7 @@ var _ = Describe("Error Handling", func() {
 			w := httptest.NewRecorder()
 			r := httptest.NewRequest("GET", "/", nil)
 			handler.ServeHTTP(w, r)
-			Expect(w.Code).To(Equal(http.StatusOK))
+			Expect(w.Code).To(Equal(http.StatusNotFound))
 		})
 	})
 	Describe("hit endpoint / with GET request method with non empty data and err nil", func() {
