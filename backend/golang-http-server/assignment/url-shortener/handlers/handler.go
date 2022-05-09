@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	// "errors"
-	// "net/http"
+	"fmt"
+	"net/http"
 
 	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/entity"
 	"github.com/ruang-guru/playground/backend/golang-http-server/assignment/url-shortener/repository"
@@ -22,24 +22,67 @@ func NewURLHandler(repo *repository.URLRepository) URLHandler {
 
 func (h *URLHandler) Get(c *gin.Context) {
 	// TODO: answer here
-	var g entity.URL
-	m , err := h.repo.Get(g.LongURL)
+	path := c.Param("path")
+	url, err := h.repo.Get(path)
 	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-	h.repo.Data[m.LongURL] = m.LongURL
+	if url.LongURL == "" {
+		c.JSON(http.StatusNotFound, gin.H{"error": entity.ErrURLNotFound})
+		return
+	}
+
+	c.Redirect(http.StatusFound, url.LongURL)
+
 }
 
 func (h *URLHandler) Create(c *gin.Context) {
-	var g entity.URL
-	m, err := h.repo.Create(g.LongURL)
-	if err != nil {
-		return
+	// TODO: answer here
+	var url entity.URL
+	if err := c.ShouldBindJSON(&url); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
 	}
-	h.repo.Data[m.LongURL] = m.LongURL
-	
+	urls, err := h.repo.Create(url.LongURL)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"longURL":  urls.LongURL,
+		"shortURL": urls.ShortURL,
+	})
 }
 
 func (h *URLHandler) CreateCustom(c *gin.Context) {
 	// TODO: answer here
+	var url entity.URL
+	if err := c.ShouldBindJSON(&url); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+
+	if url.LongURL == "" {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": entity.ErrURLNotFound,
+		})
+	}
+	urls, err := h.repo.CreateCustom(url.LongURL, url.ShortURL)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"longURL":  url.LongURL,
+		"shortURL": url.ShortURL,
+	})
+
+	fmt.Println("longnya", urls.LongURL)
+	fmt.Println("shortnya", urls.ShortURL)
+	fmt.Println("test ::", url)
 }
