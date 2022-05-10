@@ -109,6 +109,7 @@ func GetProductNameSales(sales []Sales, productName string) []Sales {
 	var productSales []Sales
 	for _, product := range sales {
 		// TODO: answer here
+		productSales = append(productSales, product) // ..
 	}
 
 	return productSales
@@ -120,6 +121,7 @@ func GetTimePeriodSales(sales []Sales, startPeriod *time.Time, endPeriod *time.T
 	log.Println(endOfDay, startPeriod)
 	for _, product := range sales {
 		// TODO: answer here
+		productSales = append(productSales,product) // ..
 	}
 	return productSales
 }
@@ -127,8 +129,10 @@ func GetTimePeriodSales(sales []Sales, startPeriod *time.Time, endPeriod *time.T
 func GetProductNameTimePeriodSales(sales []Sales, productName string, startPeriod *time.Time, endPeriod *time.Time) []Sales {
 	var productSales []Sales
 	endOfDay := time.Date(endPeriod.Year(), endPeriod.Month(), endPeriod.Day(), 23, 59, 59, 0, time.UTC)
+	log.Println(endOfDay, startPeriod) // ..
 	for _, product := range sales {
 		// TODO: answer here
+		productSales = append(productSales, product) // ..
 	}
 	return productSales
 }
