@@ -20,6 +20,16 @@ spikeValue := 20
 func spikeTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := 1 * time.Second                            //durasi attack
+	frequency := 50                                        //jumlah request
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second} //mengatur rate request
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target,
+	}) //mengatur targeter vegeta
+	metrics = vegetaAttackSpike(targeter, rate, duration,20) //menjalankan vegeta attack
+	// fmt.Println(metrics.StatusCodes)                  //menampilkan status code
+	// fmt.Println(metrics.Latencies.Max) 
 	return metrics
 }
 
@@ -33,6 +43,10 @@ func spikeTest(target string) *vegeta.Metrics {
 func vegetaAttackSpike(targeter vegeta.Targeter, rate vegeta.ConstantPacer, duration time.Duration, spikeValue int) *vegeta.Metrics {
 	var metrics vegeta.Metrics
 	// TODO: answer here
+	attacker := vegeta.NewAttacker() //membuat attacker baru
+	for res := range attacker.Attack(targeter, rate, duration, "Example") {
+		metrics.Add(res) //menambahkan hasil attack ke dalam metrics
+	} //melakukan vegeta attack
 	metrics.Close()
 	return &metrics
 }
