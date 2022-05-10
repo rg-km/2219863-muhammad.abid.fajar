@@ -40,6 +40,7 @@ func getMovieTest(target string) *vegeta.Metrics {
 func getMoviesTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	
 	return metrics
 }
 
