@@ -28,6 +28,7 @@ func main() {
 
 func printBook(i int) {
 	// TODO: answer here
+	
 	defer deferring(i)
 
 	books := []string{
