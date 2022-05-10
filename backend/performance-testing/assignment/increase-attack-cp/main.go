@@ -20,8 +20,8 @@ increaseValue := 2
 func increaseTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
-	duration := 16 * time.Second                            //durasi attack
-	frequency := 1                                        //jumlah request
+	duration := 4 * time.Second //durasi attack
+	frequency := 4             //jumlah request
 	increaseValue := 2
 	rate := vegeta.Rate{Freq: frequency, Per: time.Second} //mengatur rate request
 	targeter := vegeta.NewStaticTargeter(vegeta.Target{
@@ -29,7 +29,7 @@ func increaseTest(target string) *vegeta.Metrics {
 		URL:    target,
 	}) //mengatur targeter vegeta
 	metrics = vegetaAttackIncreaseBySecond(targeter, rate, duration, increaseValue) //menjalankan vegeta attack
-	fmt.Println(metrics.StatusCodes)                  //menampilkan status code
+	fmt.Println(metrics.StatusCodes)                                                //menampilkan status code
 	fmt.Println(metrics.Latencies.Max)
 
 	return metrics
