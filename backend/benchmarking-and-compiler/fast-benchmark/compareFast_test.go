@@ -11,4 +11,5 @@ import (
 func BenchmarkUnmarshal(b *testing.B) {
 	// use strconv.Itoa(n) to convert n to string, use UnmarshallFast here
 	// TODO: answer here
+	compare.UnmarshallFast(strconv.Itoa(b.N))
 }
