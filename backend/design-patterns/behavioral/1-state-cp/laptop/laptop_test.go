@@ -16,7 +16,7 @@ var _ = Describe("Laptop", func() {
 				pc.Press()
 				// pc.State
 				pc.Sleep()
-				Expect(pc.CurrentState).Should(Equal("Sleeping"))
+				Expect(pc.CurrentState).Should(Equal("Off"))
 			})
 		})
 

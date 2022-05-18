@@ -13,6 +13,15 @@ type SortKM struct {
 
 func (s *SortKM) Sort(array []int) {
 	// TODO: answer here
+	asc := SortKMasc{&AscendingSort{}}
+	des := SortKMdes{&DescendingSort{}}
+	if asc.Strategy == s.Strategy {
+		asc.Strategy.Sort(array)
+		return
+	} else if des.Strategy == s.Strategy {
+		des.Strategy.Sort(array)
+		return
+	}
 }
 
 func (s *SortKM) SetStrategy(Strategy Strategy) {
