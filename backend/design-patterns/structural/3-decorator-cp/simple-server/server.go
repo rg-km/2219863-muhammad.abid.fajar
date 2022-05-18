@@ -25,6 +25,13 @@ type Server struct {
 
 func (s *Server) GetPerson(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
+	person := Person{
+		Name:  "John Doe",
+		Age:   30,
+		Email: "john_doe@gmail.com",
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(person)
 }
 
 type Logging struct {
@@ -32,5 +39,11 @@ type Logging struct {
 
 // Karena agak ribet untuk melakukan testing pada stdout. Maka disini kita menggantinya dengan Header
 func (l Logging) AddLogging(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) // TODO: replace this
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("System-Log", "logged")
+		w.Header().Set("Content-Type", "application/json")
+		fmt.Printf("Request: %s\n", r.URL.Path)
+		endpoint(w, r)
+	})
+	// return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) // TODO: replace this
 }

@@ -1,6 +1,7 @@
 package coffe
 
 import (
+	"fmt"
 	"strings"
 )
 
@@ -18,7 +19,20 @@ func (i Ice) GetCost() float64 {
 }
 
 func (i Ice) GetDescription() string {
-	return description // TODO: replace this
+	description := i.Coffe.GetDescription() + ", Ice"
+
+	fmt.Println("desc : ", description)
+	fmt.Println("repeat word :", checkRepeatingWord(description))
+	fmt.Println(i.Coffe.GetCost())
+	if checkRepeatingWord(description) {
+		if i.Coffe.GetCost() > 3.30 {
+			return description + ", BEKU"
+		}
+
+	}
+
+	return description
+	// return description // TODO: replace this
 }
 
 // check repeating word in a string
