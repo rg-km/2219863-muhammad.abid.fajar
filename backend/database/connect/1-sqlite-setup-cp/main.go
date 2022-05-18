@@ -24,7 +24,7 @@ func main() {
 }
 
 func ConnectSQLite() (string, error) {
-	sql.Open("", "") // replace with your own database path
+	sql.Open("sqlite3", "./studentData.db") // replace with your own database path
 
-	return "", nil // TODO: replace this
+	return "You are successfully opening the database studentData.db", nil // TODO: replace this
 }
