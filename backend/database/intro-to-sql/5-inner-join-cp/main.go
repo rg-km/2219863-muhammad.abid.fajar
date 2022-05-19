@@ -28,15 +28,12 @@ func (r *MovieRepository) FetchMovies() ([]model.Movie, error) {
 		, m.title
 		, m.description
 		, m.year
-		, m.director_name
-		, m.genre_name
-		, s.name as student_name
-		, p.name as product_name
-		, p.price as product_price
-	FROM orders m
-	INNER JOIN students s ON o.student_id = s.id
-	INNER JOIN products p ON o.product_id = p.id
-	ORDER BY o.id`
+		, s.name as genre_name
+		, p.name as director_name
+	FROM movies m
+	INNER JOIN genres s ON m.genre_id = s.id
+	INNER JOIN directors p ON m.director_id = p.id
+	ORDER BY m.id`
 
 	rows, err := r.db.Query(sqlStmt)
 	if err != nil {
@@ -72,6 +69,18 @@ func (r *MovieRepository) FetchMovieByID(id int64) (*model.Movie, error) {
 	// 2. use inner join to fetch all movies and their genres and their directors
 
 	// TODO: answer here
+	sqlStmt = `
+	SELECT
+		m.id
+		, m.title
+		, m.description
+		, m.year
+		, s.name as genre_name
+		, p.name as director_name
+	FROM movies m
+	INNER JOIN genres s ON m.genre_id = s.id
+	INNER JOIN directors p ON m.director_id = p.id
+	ORDER BY m.id`
 
 	row := r.db.QueryRow(sqlStmt, id)
 
