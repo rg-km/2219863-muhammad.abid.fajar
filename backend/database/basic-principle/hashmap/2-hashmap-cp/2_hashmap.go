@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+import "errors"
 
 type PrimaryKey int
 
@@ -33,9 +33,32 @@ func (db *InvoiceDB) Insert(code string, name string, address string, phone stri
 }
 
 func (db *InvoiceDB) Where(id PrimaryKey) *InvoiceRow {
-	return InvoiceRow{} // TODO: replace this
+	// return InvoiceRow{} // TODO: replace this
+	f := (*db).m[id]
+
+	return &InvoiceRow{
+		ID:               id,
+		SubscriptionCode: f.SubscriptionCode,
+		CustomerName:     f.CustomerName,
+		Address:          f.Address,
+		Phone:            f.Phone,
+	}
+
 }
 
 func (db *InvoiceDB) Update(id PrimaryKey, code string, name string, address string, phone string) (*InvoiceRow, error) {
-	return nil, nil // TODO: replace this
+	c := db.Where(id)
+
+	if c == nil {
+		return nil, errors.New("not found")
+	}
+
+	return &InvoiceRow{
+		SubscriptionCode: code,
+		CustomerName:     name,
+		Address:          address,
+		Phone:            phone,
+	}, nil
+
+	// return nil, nil // TODO: replace this
 }

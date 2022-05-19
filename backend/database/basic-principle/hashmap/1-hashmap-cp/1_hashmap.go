@@ -1,6 +1,8 @@
 package main
 
-import "errors"
+import (
+	"errors"
+)
 
 type HashMap struct {
 	m map[int]string
@@ -29,5 +31,11 @@ func (h *HashMap) Put(key int, value string) error {
 }
 
 func (h *HashMap) GetRange(from, to int) ([]string, error) {
-	return nil, nil // TODO: replace this
+	var dummy []string
+
+	for i := from; i < to; i++ {
+		dummy = append(dummy, h.m[i])
+	}
+
+	return dummy, nil // TODO: replace this
 }
