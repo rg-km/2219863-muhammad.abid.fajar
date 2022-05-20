@@ -4,6 +4,8 @@ import (
 
 	// TODO: answer here
 
+	"encoding/json"
+	"strconv"
 	"time"
 
 	vegeta "github.com/tsenart/vegeta/v12/lib"
@@ -25,17 +27,18 @@ type Movie struct {
 func addMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	payload, _ := json.Marshal(Movie{
+		Episode: 1,
+		Name:    "baru",
+	})
 	duration := 1 * time.Second
 	frequency := 10
-	body := "hello"
 	targeter := vegeta.NewStaticTargeter(vegeta.Target{
 		Method: "POST",
-		URL:    target,
-		Body:   []byte(body), //convert string ke byte agar bisa dikirim
+		URL:    target + "/movie",
+		Body:   payload,
 	})
 	metrics = vegetaAttack(targeter, frequency, duration)
-	// fmt.Println(metrics.StatusCodes)
-	// fmt.Println(metrics.Latencies.Max)
 	return metrics
 }
 
@@ -45,15 +48,19 @@ func addMovieTest(target string) *vegeta.Metrics {
 func getMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
-	duration := 1 * time.Second                            //durasi attack
-	frequency := 25                                        //jumlah request
-	targeter := vegeta.NewStaticTargeter(vegeta.Target{
-		Method: "GET",
-		URL:    target,
-	}) //mengatur targeter vegeta
-	metrics = vegetaAttack(targeter, frequency, duration) //menjalankan vegeta attack
-	// fmt.Println(metrics.StatusCodes)                  //menampilkan status code
-	// fmt.Println(metrics.Latencies.Max)  
+	duration := 1 * time.Second
+	frequency := 25
+	targets := []vegeta.Target{}
+	for i := 0; i < 25; i++ {
+		numberString := strconv.Itoa(i + 1)
+		targeter := vegeta.Target{
+			Method: "GET",
+			URL:    target + "/movie/" + numberString,
+		}
+		targets = append(targets, targeter)
+	}
+	targeters := vegeta.NewStaticTargeter(targets...)
+	metrics = vegetaAttack(targeters, frequency, duration)
 	return metrics
 }
 
@@ -61,15 +68,13 @@ func getMovieTest(target string) *vegeta.Metrics {
 func getMoviesTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
-	duration := 1 * time.Second                            //durasi attack
-	frequency := 20                                        //jumlah request
+	duration := 1 * time.Second
+	frequency := 20
 	targeter := vegeta.NewStaticTargeter(vegeta.Target{
 		Method: "GET",
-		URL:    target,
-	}) //mengatur targeter vegeta
-	metrics = vegetaAttack(targeter, frequency, duration) //menjalankan vegeta attack
-	// fmt.Println(metrics.StatusCodes)                  //menampilkan status code
-	// fmt.Println(metrics.Latencies.Max)    
+		URL:    target + "/movies/",
+	})
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 

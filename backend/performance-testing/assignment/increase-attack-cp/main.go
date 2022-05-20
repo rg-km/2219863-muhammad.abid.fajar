@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 
 	vegeta "github.com/tsenart/vegeta/v12/lib"
@@ -20,17 +19,17 @@ increaseValue := 2
 func increaseTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
-	duration := 4 * time.Second //durasi attack
-	frequency := 4             //jumlah request
+	body := "hello"
+	duration := 4 * time.Second
+	frequency := 1
 	increaseValue := 2
-	rate := vegeta.Rate{Freq: frequency, Per: time.Second} //mengatur rate request
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
 	targeter := vegeta.NewStaticTargeter(vegeta.Target{
-		Method: "GET",
+		Method: "POST",
 		URL:    target,
-	}) //mengatur targeter vegeta
-	metrics = vegetaAttackIncreaseBySecond(targeter, rate, duration, increaseValue) //menjalankan vegeta attack
-	fmt.Println(metrics.StatusCodes)                                                //menampilkan status code
-	fmt.Println(metrics.Latencies.Max)
+		Body:   []byte(body),
+	})
+	metrics = vegetaAttackIncreaseBySecond(targeter, rate, duration, increaseValue)
 
 	return metrics
 }
@@ -47,9 +46,14 @@ func vegetaAttackIncreaseBySecond(targeter vegeta.Targeter, rate vegeta.Constant
 	var metrics vegeta.Metrics
 	// TODO: answer here
 	attacker := vegeta.NewAttacker()
-	for res := range attacker.Attack(targeter, rate, duration, "Example") {
-		metrics.Add(res) //menambahkan hasil attack ke dalam metrics
-	} //melakukan vegeta attack
+	for i := 0; i < int(duration.Seconds()); i++ {
+		if i != 0 {
+			rate.Freq += increaseValue
+		}
+		for res := range attacker.Attack(targeter, rate, time.Second, "Example") {
+			metrics.Add(res)
+		}
+	}
 	metrics.Close()
 	return &metrics
 }
