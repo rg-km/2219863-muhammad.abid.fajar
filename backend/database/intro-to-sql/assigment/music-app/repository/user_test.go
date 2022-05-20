@@ -27,7 +27,7 @@ var _ = Describe("User", func() {
 			panic(err)
 		}
 
-		_, err = db.Exec(`INSERT INTO users (id, name, created_at) VALUES
+		_, err = db.Exec(`INSERT or REPLACE INTO users (id, name, created_at) VALUES
 			(1, 'John', '2020-01-01 00:00:00'),
 			(2, 'Jane', '2020-01-01 00:00:00'),
 			(3, 'Jack', '2020-01-01 00:00:00');`)
