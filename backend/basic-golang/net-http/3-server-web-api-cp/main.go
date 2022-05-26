@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"net/http"
-	"path"
 )
 
 // Buat view untuk menampilkan table berdasarkan table ID
