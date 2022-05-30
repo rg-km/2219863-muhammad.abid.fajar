@@ -47,39 +47,83 @@ func Migrate() (*sql.DB, error) {
 	if err != nil {
 		panic(err)
 	}
-	sqlStmt := `CREATE TABLE ... ;` // TODO: replace this
+	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_2nf (
+		no_bon VARCHAR(10),
+		nama_produk VARCHAR(30),
+		harga_produk INTEGER,
+		jumlah_produk INTEGER,
+		harga_total INTEGER,
+		sub_total INTEGER,
+		discount INTEGER,
+		total INTEGER,
+		bayar INTEGER,
+		kembalian INTEGER,
+		nama_kasir VARCHAR(30),
+		tanggal VARCHAR(30),
+		waktu VARCHAR(30)
+	) ;` // TODO: replace this
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
-	_, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	_, err = db.Exec(`
+	INSERT OR REPLACE INTO 
+	rekap_2nf (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
+	VALUES 
+	("00001", "B001", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
+	("00001", "B002", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
+	("00001", "B003", 1500, 4, 6000, 42000, 0, 42000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
+	("00001", "B004", 17500, 2, 35000, 77000, 0, 77000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
+	("00002", "B001", 4500, 1, 4500, 4500, 0, 4500, 17500, 0, "K02", "04-05-2022", "12:00:00"),
+	("00002", "B004", 17400, 1, 17500, 22000, 0, 22000, 117500, 0, "K02", "04-05-2022", "12:00:00"),
+	("00002", "BOO5", 100000, 1, 100000, 117500, 0, 117500, 117500, 0, "K02", "04-05-2022", "12:00:00");`) // TODO: replace this
 
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt = `CREATE TABLE ... ;` // TODO: replace this
+	sqlStmt = `CREATE TABLE IF NOT EXISTS barang_2nf (
+		kode_barang VARCHAR(10),
+		nama_barang VARCHAR(30),
+		harga_barang INTEGER
+	) ;` // TODO: replace this
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	_, err = db.Exec(`
+	INSERT OR REPLACE INTO
+	barang_2nf (kode_barang, nama_barang, harga_barang)
+	VALUES 
+	("B001", "Disket", 4500),
+	("B002", "Refil Tinta", 22500),
+	("B003", "CD Blank", 1500),
+	("B004", "Mouse", 17500),
+	("B005", "Flash Disk", 100000);`) // TODO: replace this
 
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt = `CREATE TABLE ... ;` // TODO: replace this
+	sqlStmt = `CREATE TABLE IF NOT EXISTS kasir_2nf (
+		kode_kasir VARCHAR(10),
+		nama_kasir VARCHAR(30)
+	) ;` // TODO: replace this
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = db.Exec(`INSERT INTO ... VALUES ... ;`) // TODO: replace this
+	_, err = db.Exec(`
+	INSERT OR REPLACE INTO
+	kasir_2nf (kode_kasir, nama_kasir)
+	VALUES 
+	("K01", "Rosi"),
+	("K02", "Dewi");`) // TODO: replace this
 
 	if err != nil {
 		panic(err)
@@ -95,7 +139,7 @@ func checkLatestNoBon(no_bon string) (int, error) {
 		panic(err)
 	}
 
-	sqlStmt := `SELECT ... FROM ... WHERE ... = ?;` // TODO: replace this
+	sqlStmt := `SELECT no_bon FROM rekap_2nf WHERE no_bon = ?;` // TODO: replace this
 
 	row := db.QueryRow(sqlStmt, no_bon)
 	var latestId int
@@ -114,7 +158,7 @@ func checkLatestNoBarang(kode_barang string) (int, error) {
 		panic(err)
 	}
 
-	sqlStmt := `...` // TODO: replace this
+	sqlStmt := `SELECT harga_barang FROM barang_2nf WHERE kode_barang = ?;` // TODO: replace this
 
 	row := db.QueryRow(sqlStmt, kode_barang)
 	var latestId int
@@ -133,10 +177,10 @@ func checkLatestNoKasir(kode_kasir string) (int, error) {
 		panic(err)
 	}
 
-	sqlStmt := `...` // TODO: replace this
+	sqlStmt := `SELECT nama_kasir FROM kasir_2nf WHERE kode_kasir = ?;` // TODO: replace this
 
 	row := db.QueryRow(sqlStmt, kode_kasir)
-	var latestId int
+	var latestId string
 	err = row.Scan(&latestId)
 	if err != nil {
 		return 0, err
