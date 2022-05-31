@@ -122,7 +122,7 @@ func Migrate() (*sql.DB, error) {
 	(7000, 2000, "SMA Negeri 7", 0.5, "B", 7),
 	(8000, 3000, "SMA Negeri 8", 0.5, "B", 8),
 	(9000, 4000, "SMA Negeri 9", 0.5, "B", 9),
-	(10000, 5000, "SMA Negeri 10", 0.5, "B", 10);`) // TODO: replace this
+	(10000, 5000, "SMA Negeri 10", 0.5, "B", 10);`) // TODO: replace this <SOMETHING WRONG WITH THIS CODE>
 
 	if err != nil {
 		panic(err)
