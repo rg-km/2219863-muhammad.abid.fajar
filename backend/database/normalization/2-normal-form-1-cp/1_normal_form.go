@@ -1,7 +1,7 @@
 package main
 
 // pada tahap normalisai 1 (1NF), kita akan menyederhanakan bentuk unormal sesuai dengan kaidah bentuk normalisasi 1
-// dengan menghilangkan duplikasi kolom dari tabel yang sama
+// dengan memisahkan data rekap dengan nomor bon yang sama dari 1 row ke beberapa row
 
 import (
 	"database/sql"
@@ -27,13 +27,15 @@ type Rekap struct {
 }
 
 // Migrate digunakan untuk melakukan migrasi database dengan data yang dibutuhkan
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate:
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate
+// Buatlah tabel dengan nama rekap dan insert data seperti pada contoh di bagian bawah file ini
 func Migrate() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_1nf (
 		no_bon VARCHAR(10),
 		nama_produk VARCHAR(30),
@@ -49,6 +51,9 @@ func Migrate() (*sql.DB, error) {
 		tanggal VARCHAR(30),
 		waktu VARCHAR(30)
 	) ;` // TODO: replace this
+=======
+	sqlStmt := `CREATE TABLE rekap ... ;` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -74,23 +79,28 @@ func Migrate() (*sql.DB, error) {
 	return db, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestId:
-func checkLatestId(id string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi countByNoBon:
+// countByNoBon digunakan untuk menghitung jumlah data yang ada berdasarkan no_bon
+func countByNoBon(noBon string) (int, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
+<<<<<<< HEAD
 	
 	sqlStmt := `SELECT no_bon FROM rekap_1nf WHERE no_bon = ?;` // TODO: replace this
+=======
 
-	row := db.QueryRow(sqlStmt, id)
-	var latestId int
-	err = row.Scan(&latestId)
+	sqlStmt := `SELECT ... FROM rekap WHERE ... = ?;` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
+
+	row := db.QueryRow(sqlStmt, noBon)
+	var countBon int
+	err = row.Scan(&countBon)
 	if err != nil {
 		return 0, err
-	} else {
-		return 1, nil
 	}
+	return countBon, nil
 }
 
 // insert value hint

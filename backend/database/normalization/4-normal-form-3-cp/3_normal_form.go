@@ -44,12 +44,15 @@ type Kasir struct {
 
 // Migrate digunakan untuk melakukan migrasi database dengan data yang dibutuhkan
 // Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate:
+// Buatlah tabel dengan nama rekap, rekap_detail, barang, dan kasir
+// Lalu insert data ke masing-masing tabel seperti pada contoh di bagian bawah file ini
 func Migrate() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_3nf (
 		no_bon VARCHAR(10),
 		discount INTEGER,
@@ -60,12 +63,16 @@ func Migrate() (*sql.DB, error) {
 		tanggal VARCHAR(30),
 		waktu VARCHAR(30)
 	) ;` // TODO: replace this
+=======
+	sqlStmt := `CREATE TABLE rekap ... ` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
+<<<<<<< HEAD
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO 
 	rekap_3nf (no_bon, discount, total, bayar, kembalian, kode_kasir, tanggal, waktu)
@@ -77,23 +84,31 @@ func Migrate() (*sql.DB, error) {
 	("00002", 0, 4500, 17500, 0, "K02", "04-05-2022", "12:00:00"),
 	("00002", 0, 22000, 117500, 0, "K02", "04-05-2022", "12:00:00"),
 	("00002", 0, 117500, 117500, 0, "K02", "04-05-2022", "12:00:00");`) // TODO: replace this
+=======
+	_, err = db.Exec(`INSERT INTO rekap ... `) // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt = `CREATE TABLE IF NOT EXISTS rekap_detail_3nf (
 		no_bon VARCHAR(10),
 		kode_barang VARCHAR(30),
 		harga INTEGER,
 		jumlah INTEGER
 	) ` // TODO: replace this
+=======
+	sqlStmt = `CREATE TABLE rekap_detail ... ` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
+<<<<<<< HEAD
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO
 	rekap_detail_3nf (no_bon, kode_barang, harga, jumlah)
@@ -105,22 +120,30 @@ func Migrate() (*sql.DB, error) {
 	("00002", "B001", 4500, 1),
 	("00002", "B004", 17400, 1),
 	("00002", "B005", 100000, 1);`) // TODO: replace this
+=======
+	_, err = db.Exec(`INSERT INTO rekap_detail ... `) // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt = `CREATE TABLE IF NOT EXISTS barang_3nf (
 		kode_barang VARCHAR(10),
 		nama_barang VARCHAR(30),
 		harga_barang INTEGER
 	) ;` // TODO: replace this
+=======
+	sqlStmt = `CREATE TABLE barang ... ` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
+<<<<<<< HEAD
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO
 	barang_3nf (kode_barang, nama_barang, harga_barang)
@@ -130,27 +153,38 @@ func Migrate() (*sql.DB, error) {
 	("B003", "CD Blank", 1500),
 	("B004", "Mouse", 17500),
 	("B005", "Flash Disk", 100000);`) // TODO: replace this
+=======
+	_, err = db.Exec(`INSEERT INTO barang ... `) // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt = `CREATE TABLE IF NOT EXISTS kasir_3nf (
 		kode_kasir VARCHAR(10),
 		nama_kasir VARCHAR(30)
 	) ;` // TODO: replace this
+=======
+	sqlStmt = `CREATE TABLE kasir ... ` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
 		return nil, err
 	}
 
+<<<<<<< HEAD
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO
 	kasir_3nf (kode_kasir, nama_kasir)
 	VALUES 
 	("K01", "Rosi"),
 	("K02", "Dewi");`) // TODO: replace this
+=======
+	_, err = db.Exec(`INSERT INTO kasir ... `) // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	if err != nil {
 		panic(err)
@@ -159,78 +193,95 @@ func Migrate() (*sql.DB, error) {
 	return db, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoBon:
-func checkLatestNoBon(no_bon string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkNoBonExists:
+// checkNoBonExists digunakan untuk menghitung jumlah data yang ada berdasarkan no_bon
+func checkNoBonExists(noBon string) (bool, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `SELECT no_bon FROM rekap_3nf WHERE no_bon = ?;` // TODO: replace this
+=======
+	sqlStmt := `SELECT ... FROM ... WHERE ... = ?;` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
-	row := db.QueryRow(sqlStmt, no_bon)
-	var latestId int
-	err = row.Scan(&latestId)
+	row := db.QueryRow(sqlStmt, noBon)
+	var countBon int
+	err = row.Scan(&countBon)
 	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+		return false, err
 	}
+	return true, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoBonDetail:
-func checkLatestNoBonDetail(no_bon_detail string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi countRekapDetailByNoBon:
+// countRekapDetailByNoBon digunakan untuk menghitung jumlah rekap detail yang ada berdasarkan no_bon
+func countRekapDetailByNoBon(noBon string) (int, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `SELECT no_bon FROM rekap_detail_3nf WHERE no_bon = ?;` // TODO: replace this
+=======
+	sqlStmt := `SELECT ... FROM ... WHERE ... = ?;` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
-	row := db.QueryRow(sqlStmt, no_bon_detail)
-	var latestId int
-	err = row.Scan(&latestId)
+	row := db.QueryRow(sqlStmt, noBon)
+	var countBon int
+	err = row.Scan(&countBon)
 	if err != nil {
 		return 0, err
-	} else {
-		return 1, nil
 	}
+	return countBon, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoBarang:
-func checkLatestNoBarang(kode_barang string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkBarangExists:
+func checkBarangExists(kodeBarang string) (bool, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `SELECT harga_barang FROM barang_3nf WHERE kode_barang = ?;` // TODO: replace this
+=======
+	sqlStmt := `...` // TODO: replace this
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
-	row := db.QueryRow(sqlStmt, kode_barang)
+	row := db.QueryRow(sqlStmt, kodeBarang)
 	var latestId int
 	err = row.Scan(&latestId)
 	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+		return false, err
 	}
+	return true, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoKasir:
-func checkLatestNoKasir(kode_kasir string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkKasirExists:
+func checkKasirExists(kodeKasir string) (bool, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
+<<<<<<< HEAD
 	sqlStmt := `SELECT kode_kasir FROM kasir_3nf WHERE kode_kasir = ?;` // TODO: replace this
 
 	row := db.QueryRow(sqlStmt, kode_kasir)
 	var latestId string
+=======
+	sqlStmt := `...` // TODO: replace this
+
+	row := db.QueryRow(sqlStmt, kodeKasir)
+	var latestId int
+>>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 	err = row.Scan(&latestId)
 	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+		return false, err
 	}
+	return true, nil
 }
