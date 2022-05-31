@@ -35,8 +35,7 @@ func Migrate() (*sql.DB, error) {
 		panic(err)
 	}
 
-<<<<<<< HEAD
-	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_1nf (
+	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap (
 		no_bon VARCHAR(10),
 		nama_produk VARCHAR(30),
 		harga_produk INTEGER,
@@ -51,9 +50,6 @@ func Migrate() (*sql.DB, error) {
 		tanggal VARCHAR(30),
 		waktu VARCHAR(30)
 	) ;` // TODO: replace this
-=======
-	sqlStmt := `CREATE TABLE rekap ... ;` // TODO: replace this
->>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
 
 	_, err = db.Exec(sqlStmt)
 	if err != nil {
@@ -62,7 +58,7 @@ func Migrate() (*sql.DB, error) {
 
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO 
-	rekap_1nf (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
+	rekap (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
 	VALUES 
 	("00001", "Disket", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
 	("00001", "Refil Tinta", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
@@ -86,19 +82,17 @@ func countByNoBon(noBon string) (int, error) {
 	if err != nil {
 		panic(err)
 	}
-<<<<<<< HEAD
-	
-	sqlStmt := `SELECT no_bon FROM rekap_1nf WHERE no_bon = ?;` // TODO: replace this
-=======
 
-	sqlStmt := `SELECT ... FROM rekap WHERE ... = ?;` // TODO: replace this
->>>>>>> 59c364d69411d5bf5e3abd9985de8b5d350c840b
+	sqlStmt := `SELECT no_bon FROM rekap WHERE no_bon = ?;` // TODO: replace this
 
-	row := db.QueryRow(sqlStmt, noBon)
-	var countBon int
-	err = row.Scan(&countBon)
+	row, err := db.Query(sqlStmt, noBon)
 	if err != nil {
-		return 0, err
+		panic(err)
+	}
+	var countBon int
+	defer row.Close()
+	for row.Next() {
+		countBon++
 	}
 	return countBon, nil
 }
