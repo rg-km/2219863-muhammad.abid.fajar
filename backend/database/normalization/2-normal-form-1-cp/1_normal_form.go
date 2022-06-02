@@ -1,7 +1,7 @@
 package main
 
 // pada tahap normalisai 1 (1NF), kita akan menyederhanakan bentuk unormal sesuai dengan kaidah bentuk normalisasi 1
-// dengan menghilangkan duplikasi kolom dari tabel yang sama
+// dengan memisahkan data rekap dengan nomor bon yang sama dari 1 row ke beberapa row
 
 import (
 	"database/sql"
@@ -27,14 +27,15 @@ type Rekap struct {
 }
 
 // Migrate digunakan untuk melakukan migrasi database dengan data yang dibutuhkan
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate:
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate
+// Buatlah tabel dengan nama rekap dan insert data seperti pada contoh di bagian bawah file ini
 func Migrate() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_1nf (
+	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap (
 		no_bon VARCHAR(10),
 		nama_produk VARCHAR(30),
 		harga_produk INTEGER,
@@ -57,7 +58,7 @@ func Migrate() (*sql.DB, error) {
 
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO 
-	rekap_1nf (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
+	rekap (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
 	VALUES 
 	("00001", "Disket", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
 	("00001", "Refil Tinta", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "Rosi", "04-05-2022", "12:00:00"),
@@ -74,23 +75,26 @@ func Migrate() (*sql.DB, error) {
 	return db, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestId:
-func checkLatestId(id string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi countByNoBon:
+// countByNoBon digunakan untuk menghitung jumlah data yang ada berdasarkan no_bon
+func countByNoBon(noBon string) (int, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
-	
-	sqlStmt := `SELECT no_bon FROM rekap_1nf WHERE no_bon = ?;` // TODO: replace this
 
-	row := db.QueryRow(sqlStmt, id)
-	var latestId int
-	err = row.Scan(&latestId)
+	sqlStmt := `SELECT no_bon FROM rekap WHERE no_bon = ?;` // TODO: replace this
+
+	row, err := db.Query(sqlStmt, noBon)
 	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+		panic(err)
 	}
+	var countBon int
+	defer row.Close()
+	for row.Next() {
+		countBon++
+	}
+	return countBon, nil
 }
 
 // insert value hint

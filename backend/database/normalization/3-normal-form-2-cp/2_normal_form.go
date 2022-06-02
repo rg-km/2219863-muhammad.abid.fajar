@@ -41,13 +41,15 @@ type Kasir struct {
 }
 
 // Migrate digunakan untuk melakukan migrasi database dengan data yang dibutuhkan
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate:
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi Migrate
+// Buatlah tabel dengan nama rekap, barang, dan kasir
+// Lalu insert data ke masing-masing tabel seperti pada contoh di bagian bawah file ini
 func Migrate() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
-	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap_2nf (
+	sqlStmt := `CREATE TABLE IF NOT EXISTS rekap (
 		no_bon VARCHAR(10),
 		nama_produk VARCHAR(30),
 		harga_produk INTEGER,
@@ -69,7 +71,7 @@ func Migrate() (*sql.DB, error) {
 	}
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO 
-	rekap_2nf (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
+	rekap (no_bon, nama_produk, harga_produk, jumlah_produk, harga_total, sub_total, discount, total, bayar, kembalian, nama_kasir, tanggal, waktu)
 	VALUES 
 	("00001", "B001", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
 	("00001", "B002", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
@@ -83,7 +85,7 @@ func Migrate() (*sql.DB, error) {
 		panic(err)
 	}
 
-	sqlStmt = `CREATE TABLE IF NOT EXISTS barang_2nf (
+	sqlStmt = `CREATE TABLE IF NOT EXISTS barang (
 		kode_barang VARCHAR(10),
 		nama_barang VARCHAR(30),
 		harga_barang INTEGER
@@ -96,7 +98,7 @@ func Migrate() (*sql.DB, error) {
 
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO
-	barang_2nf (kode_barang, nama_barang, harga_barang)
+	barang (kode_barang, nama_barang, harga_barang)
 	VALUES 
 	("B001", "Disket", 4500),
 	("B002", "Refil Tinta", 22500),
@@ -108,7 +110,7 @@ func Migrate() (*sql.DB, error) {
 		panic(err)
 	}
 
-	sqlStmt = `CREATE TABLE IF NOT EXISTS kasir_2nf (
+	sqlStmt = `CREATE TABLE IF NOT EXISTS kasir (
 		kode_kasir VARCHAR(10),
 		nama_kasir VARCHAR(30)
 	) ;` // TODO: replace this
@@ -120,7 +122,7 @@ func Migrate() (*sql.DB, error) {
 
 	_, err = db.Exec(`
 	INSERT OR REPLACE INTO
-	kasir_2nf (kode_kasir, nama_kasir)
+	kasir (kode_kasir, nama_kasir)
 	VALUES 
 	("K01", "Rosi"),
 	("K02", "Dewi");`) // TODO: replace this
@@ -132,64 +134,71 @@ func Migrate() (*sql.DB, error) {
 	return db, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoBon:
-func checkLatestNoBon(no_bon string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi countByNoBon:
+// countByNoBon digunakan untuk menghitung jumlah data yang ada berdasarkan no_bon
+func countByNoBon(noBon string) (int, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt := `SELECT no_bon FROM rekap_2nf WHERE no_bon = ?;` // TODO: replace this
+	sqlStmt := `SELECT no_bon FROM rekap WHERE no_bon = ?;` // TODO: replace this
 
-	row := db.QueryRow(sqlStmt, no_bon)
+	row, err := db.Query(sqlStmt, noBon)
+	if err != nil {
+		panic(err)
+	}
+	var countBon int
+	defer row.Close()
+	for row.Next() {
+		countBon++
+	}
+	return countBon, nil
+}
+
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkBarangExists:
+func checkBarangExists(kodeBarang string) (bool, error) {
+	db, err := sql.Open("sqlite3", "./normalize-cp.db")
+	if err != nil {
+		panic(err)
+	}
+
+	sqlStmt := `SELECT harga_barang FROM barang WHERE kode_barang = ?;` // TODO: replace this
+
+	row, err := db.Query(sqlStmt, kodeBarang)
+	if err != nil {
+		panic(err)
+	}
 	var latestId int
-	err = row.Scan(&latestId)
-	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+	defer row.Close()
+	for row.Next() {
+		latestId++
 	}
+	return true, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoBarang:
-func checkLatestNoBarang(kode_barang string) (int, error) {
+// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkKasirExists:
+func checkKasirExists(kodeKasir string) (bool, error) {
 	db, err := sql.Open("sqlite3", "./normalize-cp.db")
 	if err != nil {
 		panic(err)
 	}
 
-	sqlStmt := `SELECT harga_barang FROM barang_2nf WHERE kode_barang = ?;` // TODO: replace this
+	sqlStmt := `SELECT nama_kasir FROM kasir WHERE kode_kasir = ?;` // TODO: replace this
 
-	row := db.QueryRow(sqlStmt, kode_barang)
+	row, err := db.Query(sqlStmt, kodeKasir)
+	if err != nil {
+		panic(err)
+	}
 	var latestId int
-	err = row.Scan(&latestId)
-	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
+	defer row.Close()
+	for row.Next() {
+		latestId++
 	}
+	return true, nil
 }
 
-// Tugas: Replace tanda ... dengan Query yang tepat pada fungsi checkLatestNoKasir:
-func checkLatestNoKasir(kode_kasir string) (int, error) {
-	db, err := sql.Open("sqlite3", "./normalize-cp.db")
-	if err != nil {
-		panic(err)
-	}
-
-	sqlStmt := `SELECT nama_kasir FROM kasir_2nf WHERE kode_kasir = ?;` // TODO: replace this
-
-	row := db.QueryRow(sqlStmt, kode_kasir)
-	var latestId string
-	err = row.Scan(&latestId)
-	if err != nil {
-		return 0, err
-	} else {
-		return 1, nil
-	}
-}
-
-//insert value table rekap_2nf
+//insert value table rekap
 // ("00001", "B001", 4500, 3, 13500, 13500, 0, 13500, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
 // ("00001", "B002", 22500, 1, 22500, 36000, 0, 36000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
 // ("00001", "B003", 1500, 4, 6000, 42000, 0, 42000, 100000, 23000, "K01", "04-05-2022", "12:00:00"),
@@ -198,13 +207,13 @@ func checkLatestNoKasir(kode_kasir string) (int, error) {
 // ("00002", "B004", 17400, 1, 17500, 22000, 0, 22000, 117500, 0, "K02", "04-05-2022", "12:00:00"),
 // ("00002", "BOO5", 100000, 1, 100000, 117500, 0, 117500, 117500, 0, "K02", "04-05-2022", "12:00:00")
 
-//insert value table barang_2nf
+//insert value table barang
 // ("B001", "Disket", 4500),
 // ("B002", "Refil Tinta", 22500),
 // ("B003", "CD Blank", 1500),
 // ("B004", "Mouse", 17500),
 // ("B005", "Flash Disk", 100000)
 
-//insert value table kasir_2nf
+//insert value table kasir
 // ("K01", "Rosi"),
 // ("K02", "Dewi")
